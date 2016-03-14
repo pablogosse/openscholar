@@ -194,6 +194,21 @@
     	  element.attr('href', attrs.href + '?osurl=' + encodeURIComponent(location.href) + '&uid=' + uid);
         },
       }
-    });
-  
+
+   // For alphabetically sorting menu items
+   }).filter('orderObjectBy', function() {
+     return function(items, field, reverse) {
+       var filtered = [];
+       angular.forEach(items, function(item) {
+         filtered.push(item);
+       });
+       filtered.sort(function (a, b) {
+         return (a[field] > b[field] ? 1 : -1);
+       });
+       if(reverse) filtered.reverse();
+       return filtered;
+     };
+   });
+
+
 })(jQuery);

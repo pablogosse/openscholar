@@ -15,7 +15,7 @@
                     <li class='submenu' ng-class="{'has-sub': child.children, 'heading': child.type == 'heading'}">
                       <a href="{{child.href || '#'}}" toggle-open  class="close-siblings" id="os-am-{{ key }}-{{ subkey }}" ng-class="{'toggleable': child.children, 'submenu_heading': child.children}">{{ child.label }}</a>
                       <ul ng-if="child.children" ng-style="getListStyle('os-am-{{ key }}-{{ subkey }}')">
-                        <li ng-repeat="(key, grandchild) in child.children">
+                        <li ng-repeat="(key, grandchild) in child.children | orderObjectBy:'label'">
                           <a ng-attr-href="{{ grandchild.href || '#' }}">{{ grandchild.label }}</a>
                         </li>
                       </ul>
