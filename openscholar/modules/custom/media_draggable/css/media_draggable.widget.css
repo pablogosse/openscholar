@@ -20,6 +20,7 @@
 .field-widget-media-draggable-file .file-list-single {
     border-bottom: 1px solid #ccc;
     padding: 5px 0;
+    word-wrap: break-word;
 }
 .field-widget-media-draggable-file .file-list-single .tabledrag-handle {
     display: inline-block;
@@ -28,7 +29,11 @@
 }
 .field-widget-media-draggable-file .file-list-single span {
     display: inline-block;
-    width: 55%;
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
 }
 .field-widget-media-draggable-file .file-list-single ul {
     display: inline-block;

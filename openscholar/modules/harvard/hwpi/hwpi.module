@@ -176,10 +176,9 @@ function _hwpi_branding_footer() {
       ),
     ),
     'copyright' => array(
-      '#markup' => t('<span class="harvard-copyright">Copyright &copy; @year The President and Fellows of Harvard College</span> !privacy | !access | !terms | !copyinfring', array(
+      '#markup' => t('<span class="harvard-copyright">Copyright &copy; @year The President and Fellows of Harvard College</span> !privacy | !access | !copyinfring', array(
           '!privacy' => variable_get('privacy_policy','')?'| '.l('Privacy', variable_get('privacy_policy')): '',
           '!access' => l('Accessibility', 'http://accessibility.harvard.edu/'),
-          '!terms' => l('Terms of Use', 'http://hwp.harvard.edu/terms-use'),
           '!copyinfring' => l('Report Copyright Infringement', 'http://www.harvard.edu/reporting-copyright-infringements'),
           '@year' => date('Y'),
         )),
@@ -344,16 +343,6 @@ function hwpi_vsite_register_notify_author_body_text_alter(&$body_text) {
     . "    Learn more about options and pricing at http://hwp.harvard.edu\n\n"
     . "Sincerely,\n"
     . "Harvard Web Publishing\n";
-}
-
-/**
- *  Implements hook_form_FORM_ID_alter().
- */
-function hwpi_form_vsite_register_form_alter(&$form, &$form_state) {
-  $form['agree_terms'] = array(
-    '#type' => 'item',
-    '#markup' => t('By clicking the button below, you are agreeing to our <a href="@url" target="_blank">Terms of Use</a>.', array('@url'  => 'http://hwp.harvard.edu/terms-use'))
-  );
 }
 
 /**

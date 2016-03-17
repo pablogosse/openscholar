@@ -1505,5 +1505,9 @@ function os_publications_update_7040() {
   $insert_pub_style->execute();
 }
 
-
-
+/**
+ * Adding biblio field 'biblio_date' to Journal Article.
+ */
+function os_publications_update_7041() {
+  _os_publications_update_field_data();
+}

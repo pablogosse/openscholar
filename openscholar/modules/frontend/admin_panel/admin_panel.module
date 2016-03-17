@@ -241,4 +241,10 @@ function admin_panel_drupal_goto_alter(&$path, &$options, &$http_response_code) 
   if (module_exists('overlay') && overlay_get_mode() == 'child' && !path_is_admin($path) && !url_is_external($path)) {
     $options['query']['admin_panel'] = '1';
   }
+
+  // If request path is user/logout, then removing admin_panel=1 and login=1 from destination query parameter.
+  if (request_path() == 'user/logout') {
+    unset($options['query']['admin_panel']);
+    unset($options['query']['login']);
+  }
 }
