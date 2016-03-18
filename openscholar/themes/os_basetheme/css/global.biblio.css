@@ -349,3 +349,7 @@ body.node-type-biblio .biblio-export {
     text-transform: uppercase;
     word-wrap: break-word;
 }
+.node-biblio.node-teaser .file:not(:last-child):after {
+	margin-right: 5px;
+    content: ",";
+}
