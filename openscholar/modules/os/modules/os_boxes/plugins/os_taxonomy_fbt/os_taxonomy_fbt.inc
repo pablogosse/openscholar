@@ -41,8 +41,6 @@ class os_taxonomy_fbt extends os_boxes_default {
    * Implements boxes_content::options_form().
    */
   public function options_form(&$form_state) {
-    $form = parent::options_form($form_state);
-
     ctools_include('dependent');
     ctools_add_js('dependent');
 
@@ -50,7 +48,10 @@ class os_taxonomy_fbt extends os_boxes_default {
 
     // Reset the keys.
     foreach (array_keys($form) as $setting) {
-      $setting_value = !empty($this->options[$setting]) ? $this->options[$setting] : NULL;
+      $option_value = $this->options[$setting];
+      // The form field 'depth' has an option with the value "0", This is why
+      // we check it literally so we won't reset it on that case.
+      $setting_value = !empty($option_value) || $option_value === '0' ? $this->options[$setting] : NULL;
       $form[$setting]['#default_value'] = $setting_value;
     }
 

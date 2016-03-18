@@ -370,6 +370,16 @@ function os_follow_default_networks() {
       'domain' => 'tumblr.com',
       'offset' => 3072,
     ),
+    'pinterest'    => array(
+      'title' => t('Pinterest'),
+      'domain' => 'pinterest.com',
+      'offset' => 390,
+    ),
+    'instagram'    => array(
+      'title' => t('Instagram'),
+      'domain' => 'instagram.com',
+     'offset' => 427,
+    ),
   );
 
   return $networks;
