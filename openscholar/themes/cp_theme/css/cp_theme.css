@@ -1053,3 +1053,8 @@ div.error:before {
     padding: 5px;
     width: 96%;
 }
+#site-visibility-help-text {
+    display: none;
+    font-weight: normal;
+    padding: 8px 0;
+}

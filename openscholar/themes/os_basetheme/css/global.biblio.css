@@ -349,6 +349,7 @@ body.node-type-biblio .biblio-export {
     text-transform: uppercase;
     word-wrap: break-word;
 }
+.os_sv_list_box .node-biblio.node-teaser .field-name-field-upload .field-item:not(:last-child):after,
 .node-biblio.node-teaser .file:not(:last-child):after {
 	margin-right: 5px;
     content: ",";

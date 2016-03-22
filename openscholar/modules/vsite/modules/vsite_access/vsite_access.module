@@ -151,10 +151,14 @@ function vsite_access_cp_settings() {
         '#id' => 'privacy',
         '#title' => t('Privacy'),
         '#weight' => 10,
+        '#attached' => array(
+          'js' => array(drupal_get_path('module', 'vsite_access') . '/vsite_access.js'
+          )
+        ),
       ),
       'form' => array(
         '#type' => 'radios',
-        '#title' => t('Site visibility'),
+        '#title' => t('Site visibility') . '<span id="site-visibility-help-text">' . t('The visibility change will take effect in 2 minutes') . '</span>',
         '#default_value' => $wrapper->{VSITE_ACCESS_FIELD}->value(),
         '#options' => vsite_access_privacy_available_values(),
         '#description' => t('Choose who has access to view your site.'),
@@ -181,8 +185,14 @@ function vsite_access_cp_settings_node_submit($form, &$form_state) {
   // Get the vsite_privacy value.
   if (isset($form_state['values']['vsite_private']) && $space) {
     $wrapper = entity_metadata_wrapper('node', $space->group);
+    $current_vsite_access = $space->group->group_access[LANGUAGE_NONE][0]['value'];
     $wrapper->{VSITE_ACCESS_FIELD}->set($form_state['values']['vsite_private']);
     $wrapper->save();
+    // Clear the cache when we switch the privacy in ALL cases except toggling between invite only (value = 1) and Harvard (value = 4).
+    // For toggling, the sum of previous and selected value will be always '5' for such case; other two radio buttons values are 0 and 2.
+    if (($current_vsite_access + $form_state['values']['vsite_private']) != 5 && $current_vsite_access != $form_state['values']['vsite_private']) {
+      cp_clear_site_cache();
+    }
   }
 }
 
