@@ -111,7 +111,7 @@ function os_faq_field_attach_view_alter(&$output, &$context) {
 function os_faq_preprocess_node(&$vars) {
   if ($vars['node']->type != 'faq') return;
 
-  if (!$vars['page'] && variable_get('os_faq_use_toggle', TRUE)) {
+  if (!$vars['page'] && variable_get('os_faq_use_toggle', TRUE) && $vars['view_mode'] != 'title') {
     $vars['header_attributes_array']['class'][] = 'toggle';
     $vars['content_attributes_array']['class'][] = 'os-slider';
     $vars['links_attributes_array']['class'][] = 'os-slider';
