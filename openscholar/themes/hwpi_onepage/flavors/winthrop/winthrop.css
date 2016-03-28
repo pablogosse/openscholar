@@ -1,9 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Merriweather:300);
 @import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
+
 html,
 body,
 .field-item span {
-    color: #000;
+    color: #222;
 }
 body,
 #page-title,
@@ -36,7 +37,8 @@ h2.block-title,
 #layout_16_9_side .slide-copy p,
 #layout_16_9_side .slide-copy h2,
 .slide-copy p,
-.block-boxes-os_sv_list_box .os_sv_list_box.sv-list-link.sv-list-view-links h1 a  {
+.block-boxes-os_sv_list_box .os_sv_list_box.sv-list-link.sv-list-view-links h1 a,
+.date-nav h3  {
     font-family: 'Merriweather', Georgia, serif !important;
 }
 #footer ul.menu a,
@@ -69,6 +71,9 @@ h2.block-title,
 #menu-bar {
     background: #f3f3f1;
 }
+#menu-bar ul.nice-menu a {
+    padding: 16px 15px;
+   }
 #menu-bar ul.nice-menu .menuparent ul li a,
 #menu-bar ul.nice-menu .menuparent ul li a.active,
 #menu-bar ul.nice-menu a.active,

@@ -4,3 +4,5 @@ screenshot = screenshot.png
 
 css[] = winthrop.css
 css[] = responsive.winthrop.css
+
+scripts[] = winthrop.js

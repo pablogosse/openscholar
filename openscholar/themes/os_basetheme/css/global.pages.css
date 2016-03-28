@@ -1029,8 +1029,8 @@ div.toggle {
     margin: 0;
 }
 .jcarousel-container {
-    background: #efefef;
-    border: 1px solid #CCC;
+    background: #FAFAFA;
+    border: 1px solid #e1e1e1;
 }
 .jcarousel-container .jcarousel-clip-horizontal {
     width: auto;

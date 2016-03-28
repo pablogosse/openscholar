@@ -4,3 +4,5 @@ screenshot = screenshot.png
 
 css[] = everett.css
 css[] = responsive.everett.css
+
+scripts[] = everett.js

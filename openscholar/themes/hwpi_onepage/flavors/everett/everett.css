@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+
 html,
 body,
 .field-item span {
@@ -44,8 +45,9 @@ h2.block-title,
 .block-boxes-os_sv_list_box .os_sv_list_box.sv-list-link.sv-list-view-links h1 a,
 #footer ul.menu a,
 #footer a,
-.region-header-third ul.nice-menu a {
-    font-family: 'Droid Sans', Georgia, serif !important;
+.region-header-third ul.nice-menu a,
+.date-nav h3 {
+    font-family: 'Droid Sans', sans-serif !important;
 }
 .front #content-panels .region-content-first {
     background: #FFF;
@@ -89,6 +91,9 @@ a.os-swipe-small:hover {
 .front #content-panels .region-content-bottom {
     background: rgba(186, 175, 134, 0.22);
 }
+#menu-bar ul.nice-menu a {
+    padding: 16px 15px;
+}
 #menu-bar ul.nice-menu .menuparent ul li a,
 #menu-bar ul.nice-menu .menuparent ul li a.active,
 #menu-bar ul.nice-menu a.active,
@@ -98,11 +103,6 @@ a.os-swipe-small:hover {
     text-transform: none;
     font-weight: bold;
     font-size: 1.25em;
-}
-.front .block-boxes-os_boxes_html,
-#menu-bar ul.nice-menu .menuparent ul li a,
-#menu-bar ul.nice-menu .menuparent ul li a.active {
-    /* font-size: 1em;*/
 }
 #menu-bar ul.nice-menu a.active,
 #menu-bar ul.nice-menu a:hover,
@@ -134,7 +134,7 @@ a.os-swipe-small:hover {
     background-position: -23px -566px;
 }
 ul.nice-menu ul {
-    top: 3.5em !important;
+    top: 3.8em !important;
 }
 .front .block-boxes-os_boxes_html {
     line-height: 1.4em;

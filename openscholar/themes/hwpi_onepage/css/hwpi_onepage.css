@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 body,
 #page-title,
 .node-title,
@@ -25,17 +26,20 @@ h2.block-title,
 .region-header-third ul.nice-menu a,
 #menu-bar ul.nice-menu a,
 #boxes-box-site_info,
-#boxes-box-site_info a {
-    font-family: 'Lato', Georgia, serif !important;
+#boxes-box-site_info a,
+.date-nav h3 {
+    font-family: 'Montserrat', sans-serif !important;
 }
 /* Main wrappers */
 
 html,
 body {
-    color: #333;
-    font-size: .98em;
+    color: #444;
 }
 /* Elements */
+h1, h2, h3 {
+    font-weight: normal;
+}
 
 #columns a.node-readmore {
     border-bottom: none;
@@ -44,7 +48,7 @@ body {
     position: relative;
     z-index: 9;
     text-decoration: none;
-    font-size: .78em;
+    font-size: .90em;
 }
 #columns a.node-readmore:after {
     background: url("../../hwpi_basetheme/images/hwpi_basesprite.png") no-repeat 3px -572px;
@@ -110,7 +114,7 @@ a.os-swipe-small:hover {
 }
 #menu-bar ul.nice-menu a {
     color: #FFF;
-    padding: 16px 15px;
+    padding: 16px 14px;
     text-transform: uppercase;
 }
 #menu-bar ul.nice-menu ul a {
@@ -215,7 +219,7 @@ h1#page-title {
 h2.block-title {
     padding: 20px 0 25px;
     font-size: 1.3em;
-    font-weight: bold;
+
 }
 .block-boxes-os_boxes_columns h2.block-title {
     padding: 7px 0;
@@ -438,6 +442,14 @@ a.rslides_nav {
     width: 48%;
     margin: 10% 0 0 0;
     text-align: center;
+}
+.cal-export {
+    background-position:65px -901px;
+}
+.os_events_export_links .last, 
+.view-os-events.view-id-os_events .attachment-before .links {
+
+    font-size: .85em;
 }
 /** PEOPLE DETAIL PAGE **/
 

@@ -879,7 +879,7 @@ function os_pages_os_add_new_links_alter(&$links) {
       $links['book_add_child'] = array(
         'title' => t('Page'),
         'href' => 'node/add/page',
-        'query' => isset($node->book['mlid']) ? array('parent' => $node->book['mlid'], 'destination' => 'node/' . $node->nid) : array('parent_node' => $node->nid, 'destination' => 'node/' . $node->nid),
+        'query' => isset($node->book['mlid']) ? array('parent' => $node->book['mlid']) : array('parent_node' => $node->nid, 'destination' => 'node/' . $node->nid),
       );
       $links['book_move_child'] = array(
         'title' => t('Existing Page to Section'),
@@ -948,7 +948,7 @@ function os_pages_add_subpage_submit($form, &$form_state) {
   os_pages_make_subpage($node, $parent->nid);
   node_save($node);
 
-  $form_state['redirect'] = 'node/'.$parent->nid;
+  $form_state['redirect'] = 'node/' . $node->nid;
 }
 
 /**

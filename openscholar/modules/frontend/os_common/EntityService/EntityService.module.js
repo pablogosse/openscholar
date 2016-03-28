@@ -479,7 +479,6 @@
         for (var t in keys) {
           promises.push(fetchUpdates(t, keys[t], timestamps[t]));
         }
-
         return $q.all(promises);
       }
 
@@ -558,7 +557,9 @@
               var k = keys[i];
               defers[k].notify(("Loading updates: $p% complete.").replace('$p', Math.round(((curr - 1) / max) * 100)));
             }
-            fetchUpdates(type, keys, timestamp, next);
+            fetchUpdates(type, keys, timestamp, next).then(function (keys) {
+              defer.resolve(keys);
+            });
           }
           else {
             // construct 'everything' key

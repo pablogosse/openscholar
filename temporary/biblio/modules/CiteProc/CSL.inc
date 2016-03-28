@@ -1405,6 +1405,9 @@ class csl_group extends csl_format{
       );
       $text = str_replace($quotes, $replace, $text);
     }
+    else {
+      $text = implode(' ', $text_parts);
+    }
 
 
    return $this->format($text);

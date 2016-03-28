@@ -81,7 +81,7 @@
         	morphButton.toggle();  
           } else if (typeof(menu_state) !== 'undefined') {
         	//Set the menu state to closed.
-            menu_state.main = false;
+            menu_state.main = true;
           }
         }); 
       

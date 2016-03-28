@@ -398,4 +398,17 @@ function os_image_gallery_os_entity_view_modes_alter(&$info) {
  */
 function os_image_gallery_form_media_gallery_remove_item_form_alter(&$form, &$form_state) {
   $form['description']['#markup'] = t('The file will still be available to be used in elsewhere on this site.');
+  // Overriding $form['#submit'] callbacks order so that 'os_image_gallery_remove_item_form_submit' is executed first.
+  $form_submit_callbacks = $form['#submit'];
+  $form['#submit'] = array_merge(array('os_image_gallery_remove_item_form_submit'), $form_submit_callbacks);
+}
+
+/**
+ * Submit handler for removing a media item from a gallery.
+ */
+function os_image_gallery_remove_item_form_submit($form, &$form_state) {
+  $file = new stdClass();
+  $file->fid = $form_state['values']['fid'];
+  // Adding self reference for the file in file_usage table to prevent file deletion.
+  file_usage_add($file, 'media', 'file', $file->fid);
 }

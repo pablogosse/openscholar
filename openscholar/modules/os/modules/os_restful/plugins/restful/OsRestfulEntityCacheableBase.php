@@ -170,7 +170,16 @@ abstract class OsRestfulEntityCacheableBase extends RestfulEntityBase {
 
     list ($arg1, $arg2) = explode('/', $this->getPath());
     if ($arg1 == 'updates' && $arg2 > strtotime("-30 days")) {
-      $query = $this->getQueryForUpdates($arg2);
+      $info = $this->getEntityInfo();
+      $query = $this->getEntityFieldQuery();
+
+      $this->queryForListSort($query);
+      $this->queryForListFilter($query);
+      $this->addExtraInfoToQuery($query);
+
+      if (in_array('changed', $info['schema_fields_sql']['base table'])) {
+        $query->propertyCondition('changed', (int)$timestamp, '>');
+      }
     }
     else {
       $query = $this->getEntityFieldQuery();
