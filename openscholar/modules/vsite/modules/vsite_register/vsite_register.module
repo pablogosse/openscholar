@@ -156,10 +156,10 @@ function vsite_register_block_view($delta = '') {
     case 'get_your_site_block':
       $path = 'site/register';
       if (user_access('access administration pages')) {
-        $text = t('Create a site');
+        $text = t('Create Your Site Here');
       }
       elseif (vsite_vsite_exists_access()) {
-        $text = variable_get('vsite_register_get_site_text', t('Create your site'));
+        $text = variable_get('vsite_register_get_site_text', t('Create Your Site Here'));
       }
       elseif (isset($vsites) && user_is_logged_in()) {
         if (count($vsites) > 1) {

@@ -36,6 +36,13 @@ function iqss_scholars_front_context_default_contexts_alter(&$contexts){
         'weight' => 100,
         'region' => 'sidebar_second',
     );
+	
+	$fp_blocks['boxes-iqss_scholars_fp_hwp_option'] = array(
+        'module' => 'boxes',
+        'delta' => 'iqss_scholars_fp_hwp_option',
+        'weight' => 102,
+        'region' => 'sidebar_second',
+    );
 
     $fp_blocks['boxes-iqss_scholars_fp_stats'] = array(
         'module' => 'os_stats',

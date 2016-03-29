@@ -90,7 +90,7 @@ function vsite_context_default_contexts() {
           'module' => 'vsite_register',
           'delta' => 'get_your_site_block',
           'region' => 'sidebar_second',
-          'weight' => '-8',
+          'weight' => '101',
         ),
         'os-install_status' => array(
           'module' => 'os',

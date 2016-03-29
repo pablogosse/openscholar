@@ -88,13 +88,32 @@ function iqss_scholars_front_default_box() {
 <li><span>Customize your site\'s layout and structure, and choose (or design) a unique look and feel</span></li>
 <li><span>Watch as your site is automatically updated with the latest web technology.</span></li>
 </ul>
-<p class="os-learnmore"><a href="#">Learn More</a></p>
-</div>',
+</div>
+<div class="started-oneyour-own">Get started on your own today</div>',
       'format' => 'filtered_html',
     ),
     'additional_classes' => '',
   );
   $export['iqss_scholars_fp_learnmore'] = $box;
+  
+
+   $box = new stdClass();
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
+  $box->api_version = 1;
+  $box->delta = 'iqss_scholars_fp_hwp_option';
+  $box->plugin_key = 'simple';
+  $box->title = '';
+  $box->description = 'HWP Option Info text';
+  $box->options = array(
+    'body' => array(
+      'value' => '<div align="center"><span>or</span><div class="hwp_option"><a href="http://faculty.hwp.harvard.edu/">Engage Harvard Web Publising</a> for custom
+content organization and design services</div></div>',
+      'format' => 'filtered_html',
+    ),
+    'additional_classes' => '',
+  );
+  $export['iqss_scholars_fp_hwp_option'] = $box;
+
 
   $box = new stdClass();
   $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */

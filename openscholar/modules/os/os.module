@@ -2761,7 +2761,14 @@ function os_advagg_save_aggregate_alter(&$files_to_save, $aggregate_settings, $o
   $replace = array('domain' => $domain, 'static' => $static);
   
   foreach ($files_to_save as $file_name => $file) {
-    $files_to_save[$file_name] = preg_replace_callback('/url\(\s*[\'"]?(\S*\.(?:jpeg|jpg|gif|png|css|svg|woff|eot|ttf))[\'"]?\s*\)[^;}]*?/i', '_os_advagg_build_css_path', $file);
+    $file_info = pathinfo($file_name);
+    // For aggregated css files, image paths to be started with static domain, fonts to be used as relative paths.
+    if ($file_info['extension'] == 'css') {
+      $files_to_save[$file_name] = preg_replace_callback('/url\(\s*[\'"]?(\S*\.(?:jpeg|jpg|gif|png|css|svg|woff|eot|ttf))[\'"]?\s*\)[^;}]*?/i', '_os_advagg_build_css_path', $file);
+    }
+    else {
+      $files_to_save[$file_name] = str_replace($domain, $static, $file);
+    }
   }
 }
 

@@ -15,7 +15,7 @@ function vsite_register_admin_form($form, &$state) {
       '#type' => 'textfield',
       '#title' => t('For users who may create more site(s)'),
       '#size' => 60,
-      '#default_value' => variable_get('vsite_register_get_site_text', t('Create your site')),
+      '#default_value' => variable_get('vsite_register_get_site_text', t('Create Your Site Here')),
     ),
     'vsite_register_max_site_text_single' => array(
       '#type' => 'textfield',

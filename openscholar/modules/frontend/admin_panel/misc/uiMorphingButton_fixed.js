@@ -140,8 +140,7 @@
 				jQuery(self.el).removeClass('open');
 			}
 			else {
-                alert('hi');
-				setTimeout( function() { 
+				setTimeout( function() {
 					//if(self.openTransition) {
 					  jQuery(self.contentEl).removeClass('no-transition');
 					//}
