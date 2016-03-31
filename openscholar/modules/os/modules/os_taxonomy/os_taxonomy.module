@@ -1781,6 +1781,8 @@ function os_taxonomy_taxonomy_vocabulary_update($vocabulary) {
       path_save($path);
     }
   }
+  // Clearing cache bin to render updated vocabulary data in search facets.
+  cache_clear_all('entity_info', 'cache', TRUE);
 }
 
 /**

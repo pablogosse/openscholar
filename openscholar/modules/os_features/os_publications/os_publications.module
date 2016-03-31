@@ -623,11 +623,8 @@ function os_publications_form_biblio_node_form_alter(&$form, &$form_state) {
   $form['os_menu']['#title'] = t('Menu options');
   $form['os_menu']['enabled']['#title'] = t('Place it in a menu');
 
-  // Change labels and descriptions in node author fieldset.
-  $form['author']['#title'] = t('Post Created/Edited By');
-  $form['author']['name']['#title'] = t('Posted by');
+  // Change descriptions in node author fieldset.
   $form['author']['name']['#description'] = '';
-  $form['author']['date']['#title'] = t('Posted on');
   $form['author']['date']['#description'] = t('Date can be used to change the order in which content is displayed.');
 
   // Add description to Full Text field.

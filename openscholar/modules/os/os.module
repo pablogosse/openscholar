@@ -1009,6 +1009,11 @@ function os_form_node_form_alter(&$form, $form_state) {
 
   $form['actions_top'] = $form['actions'];
 
+  // Overriding Author section title, name and date field title for all content types.
+  $form['author']['#title'] = t('Post Created/Edited By');
+  $form['author']['name']['#title'] = t('Posted by');
+  $form['author']['date']['#title'] = t('Posted on');
+
   // Add description to the name field in the author fieldset.
   $form['author']['name']['#description'] = t('You may change this if posting on behalf of someone else.');
 
@@ -2716,7 +2721,7 @@ function os_html_head_alter(&$head_elements) {
 
   // Exit early in case we have no shortlink metatag and we are not on a "vsite".
   $vsite = vsite_get_vsite();
-  if (!isset($head_elements['metatag_shortlink']) && $vsite) {
+  if (!isset($head_elements['metatag_shortlink']) && !$vsite) {
     return;
   }
 
