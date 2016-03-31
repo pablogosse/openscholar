@@ -792,7 +792,7 @@ function vsite_vsite_exists_access($vsites = array()) {
   // Denies access if user has no permission to create vsites.
   if (!$vicarious_access && !$group_create_access) {
     // Sets an error message if the user is accessing the site register form.
-    if ($path_site_register) {
+    if ($path_site_register && !module_exists('os_pinserver_auth')) {
       // Clear message queue.
       drupal_get_messages();
       global $base_url;

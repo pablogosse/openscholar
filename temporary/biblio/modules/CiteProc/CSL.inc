@@ -302,7 +302,17 @@ class csl_format extends csl_rendering_element {
           break;
         case 'capitalize-all':
         case 'title':
-          $text = mb_convert_case($text, MB_CASE_TITLE);
+          $original = $text;
+          $text = mb_convert_case($text, MB_CASE_TITLE, 'UTF-8');
+
+          // Make sure any character that's originally capitalized stays capitalized.
+          // e.g. acronyms, names with apostrophes in them, etc.
+          for ($i = 0; $i<strlen($original); $i++) {
+            if (ctype_upper($original[$i]) && !ctype_upper($text[$i])) {
+              $text[$i] = $original[$i];
+            }
+          }
+
           $text = $this->handleCapitalizeCaseConversion($text);
           break;
         case 'capitalize-first':
@@ -1200,10 +1210,10 @@ class csl_text extends csl_format {
       case 'variable':
         if (!isset($data->{$this->variable}) || empty($data->{$this->variable}) || trim($data->{$this->variable}) == FALSE) return;
         if ($this->variable == 'biblio_url') {
-          $text = l($data->{$this->variable},  $data->{$this->variable});
+          $text = l(htmlentities($data->{$this->variable}, ENT_QUOTES), $data->{$this->variable});
         }
         else {
-          $text = $data->{$this->variable}; //$this->data[$this->var];  // include the contents of a variable
+          $text = htmlentities($data->{$this->variable}, ENT_QUOTES); //$this->data[$this->var];  // include the contents of a variable
         }
         break;
       case 'macro':
