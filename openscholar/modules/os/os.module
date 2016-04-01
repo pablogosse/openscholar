@@ -2717,7 +2717,7 @@ function os_html_head_alter(&$head_elements) {
   }
 
   // Exit early in case we have no shortlink metatag and we are not on a "vsite".
-  $vsite = vsite_get_vsite();
+  $vsite = module_exists('vsite') ? vsite_get_vsite() : FALSE;
   if (!isset($head_elements['metatag_shortlink']) && !$vsite) {
     return;
   }
