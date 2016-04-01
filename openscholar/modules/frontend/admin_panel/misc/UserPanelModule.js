@@ -112,6 +112,20 @@
               }
 	        }
 
+            /* Add a permanent "stop" to the tour */
+            var lastEntryContent = "There are no new announcements. Click here to view the <a href=\"http://hwp.harvard.edu/os-alerts/announcement\">archive</a>.";
+            var lastEntry = {
+                 author: "scholar",
+                 categories: [],
+                 content: lastEntryContent,
+                 contentSnippet: lastEntryContent,
+                 link: "http://hwp.harvard.edu/os-alerts/announcement",
+                 publisheddDate: "Fri, 1 Jan 1971 00:00:00 -0800",
+                 title: "No new announcements."
+            };
+            var lastItem = osTour.notifications_item(lastEntry, num_remaining, count_element, link);
+            items.push(lastItem);
+
           var tour = {};
 	        // If there are new items
 	        if (items.length) {

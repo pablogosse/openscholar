@@ -122,11 +122,16 @@
     	  * Invoked when a user clicks "Done" on the final tour step.
 	      */
 		  notifications_read_update: function () {
+
 			    var settings = Drupal.settings.os_notifications;
 			    var url = window.location.origin + Drupal.settings.basePath + '/os/tour/user/' + settings.uid + '/notifications_read';
-			    $.get(url, function(data) {
-			      console.log(data);
-			    });
+			    console.log(url);
+   			    $.get(url, function(data) {
+  			      console.log(data);
+  			    });
+
+                var mainAnnouncementUrl = "http://hwp.harvard.edu/os-alerts/announcement";
+                window.open(mainAnnouncementUrl, "_blank");
 			  }
   };
   
