@@ -142,7 +142,6 @@ class os_sv_list extends os_boxes_default {
       ),
     );
 
-
     $form['content']['sort_by'] = array(
       '#type' => 'select',
       '#title' => 'Sorted By',

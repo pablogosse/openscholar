@@ -26,7 +26,7 @@
 		  * @param {object} entry
 		  * @returns {string} output
 		  */
-		  notifications_item: function (entry, num_remaining, count_element, target) {
+		  notifications_item: function (entry, num_remaining, count_element, target, hideTeaser) {
 			    // Prepare the output to display inside the tour's content region.
 			    var output = "<div class='feed_item'>";
 
@@ -51,7 +51,10 @@
 			      content = entry.contentSnippet;
 			    }
 			    output += content + "</span>";
-			    output += '<div class="os-tour-notifications-readmore"><a target="_blank" href="' + entry.link + '">Read more &raquo;</a></div></div>';
+
+                if (! hideTeaser) {
+                  output += '<div class="os-tour-notifications-readmore"><a target="_blank" href="' + entry.link + '">Read more &raquo;</a></div></div>';
+                }
 
 			    // Returns the item to be added to the tour's (array) `items` property .
 			    var item = {
@@ -103,6 +106,7 @@
 			    }
 			    if (parseInt(num_remaining) === -1) {
 			      count_element.text('0');
+			      count_element.hide();
 			      $("#os-tour-notifications-menu-link").slideUp('slow');
 			      return;
 			    }
@@ -115,18 +119,20 @@
 			        }
 			      }
 			    }
-			  },
+          },
 		 /**
 		  * Sets the current user's "notifications_read" to the current time.
 		  *
     	  * Invoked when a user clicks "Done" on the final tour step.
 	      */
 		  notifications_read_update: function () {
+
 			    var settings = Drupal.settings.os_notifications;
 			    var url = window.location.origin + Drupal.settings.basePath + '/os/tour/user/' + settings.uid + '/notifications_read';
-			    $.get(url, function(data) {
-			      console.log(data);
-			    });
+                console.log(url);
+   			    $.get(url, function(data) {
+  			      console.log(data);
+  			    });
 			  }
   };
   

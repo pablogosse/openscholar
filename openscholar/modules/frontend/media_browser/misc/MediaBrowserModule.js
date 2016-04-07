@@ -69,6 +69,7 @@
     $scope.loadingMessage = '';
     $scope.sortType = 'timestamp';
     $scope.sortReverse = true;
+    $scope.button_text = params.replace ? 'Select Replacement File' : 'Select files to Add'
 
     $scope.toInsert = [];
 
@@ -288,6 +289,19 @@
       var promises = [];
       $scope.checkingFilenames = true;
       for (var i = 0; i < $files.length; i++) {
+        if (params.replace) {
+          if (params.replace.filename == $files[i].name) {
+            // the fact that replace is set means we're trying to Replace a certain file
+            // If the file in question has the same name as the new one, just skip all the duplicate
+            // processing and upload it immediately.
+            $files[i].replacing = params.replace;
+            toEditForm = false;
+            directInsert = true;
+            $scope.upload([$files[i]]);
+            continue;
+          }
+        }
+
         var url = Drupal.settings.paths.api + '/files/filename/' + $files[i].name;
 
         if (Drupal.settings.spaces) {
@@ -664,6 +678,11 @@
           panes = elem.attributes['panes'].value,
           types = elem.attributes['types'].value.split(',');
 
+        if (attr['replace']) {
+          var prop = attr['replace'];
+          params.replace = scope[prop];
+        }
+
         for (var i in params.browser.panes) {
           params.browser.panes[i] = (panes.indexOf(i) !== -1);
         }
@@ -732,7 +751,8 @@
             executable: 'executable',
             document: 'document',
             html: 'html'
-          }
+          },
+          replace: false
         };
 
         return params;
@@ -750,7 +770,8 @@
             onSelect: params.onSelect || defaults.onSelect,
             types: params.types || defaults.types,
             max_filesize: params.max_filesize || null,
-            max_filesize_raw: params.max_filesize_raw || null
+            max_filesize_raw: params.max_filesize_raw || null,
+            replace: params.replace || defaults.replace
         };
 
         if (params.files) {

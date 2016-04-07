@@ -3,29 +3,14 @@
         <div>
           <div class="content-style-sidebar">
             <a href="{{ paths.vsite_home }}?admin_panel=1" class="admin-menu-homeicon"></a>
-            <div class="close_panel">
-              <span style="color:#a39d9d;">O</span><span style="color:#df1f26;">S</span>
-            </div><span class="icon icon-close">&#171; Close</span>
-            <div id='cssmenu'>
+            <span class="icon icon-close">&#171; Close</span>
+            <div id="cssmenu">
               <ul>
                 <li>&nbsp;</li>
-                <li ng-repeat="(key, parent) in admin_panel" ng-class="{'has-sub': parent.children}">
-                  <a ng-attr-href="{{parent.href || '#'}}" toggle-open class="close-siblings" id="os-am-{{ key }}" ng-class="{'toggleable': parent.children}">{{ parent.label }}</a>
-                  <ul class='sub-menu' ng-if="parent.children" ng-style="getListStyle('os-am-{{ key }}')" ng-repeat="(subkey, child) in parent.children">
-                    <li class='submenu' ng-class="{'has-sub': child.children, 'heading': child.type == 'heading'}">
-                      <a href="{{child.href || '#'}}" toggle-open  class="close-siblings" id="os-am-{{ key }}-{{ subkey }}" ng-class="{'toggleable': child.children, 'submenu_heading': child.children}">{{ child.label }}</a>
-                      <ul ng-if="child.children" ng-style="getListStyle('os-am-{{ key }}-{{ subkey }}')">
-                        <li ng-repeat="(key, grandchild) in child.children">
-                          <a ng-attr-href="{{ grandchild.href || '#' }}">{{ grandchild.label }}</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+                <li ng-repeat="(key, parent) in admin_panel" class="heading" ng-class="{'has-sub': parent.children}" admin-panel-menu-row menu-row="parent" key="{{key}}" ng-if="parent.access">
                 </li>
                 <!--REMOVE THIS LI WHEN BETA TESTING IS COMPLETE-->
-                <li style="margin-top:50px;">
-                  <a href="https://harvard.az1.qualtrics.com/jfe/form/SV_5pErjqW6E44JV0p" target="_blank" style="background: #222;" add-location>Feedback</a>
-                </li>
+                
               </ul>
             </div>
           </div>

@@ -30,7 +30,7 @@ class vsite extends space_og {
   /**
    * Returns the absolute URL to this vsite.
    */
-  public function get_absolute_url($path = "") {
+  public function get_absolute_url($path = "", $options = array()) {
     // If this is an inactive site get the homepage path from the group node
     if ($this->active && !$this->purl_provider) {}
     elseif (!$this->purl_provider) {
@@ -43,7 +43,7 @@ class vsite extends space_og {
           'id' => $this->id,
         ),
         'absolute' => TRUE,
-      ));
+      ) + $options);
   }
 
   /**

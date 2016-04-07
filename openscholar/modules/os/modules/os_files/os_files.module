@@ -196,6 +196,11 @@ function os_files_file_presave($file) {
   if ($file->type == 'undefined' || $file->filemime == 'application/octet-stream') {
     $file->type = os_files_get_type($file);
   }
+
+  if (isset($file->original) && $file->status == 0) {
+    // this combination ensures that this was a file upload with the FILE_EXISTS_RENAME flag
+    $file->filename = $file->original->filename;
+  }
 }
 
 /**

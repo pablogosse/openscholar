@@ -296,6 +296,10 @@ margin: -20px 0 10px;
 margin: 15px 0 10px;
 }
 
+.gkplus-minitheme.not-front #content-column .contextual-controls-wrapper {
+margin: 0;
+}
+
 .front #content-column .ui-tabs-panel .block-content ~ div.contextual-links-wrapper.contextual-links-processed {
 right: -24px;
 }

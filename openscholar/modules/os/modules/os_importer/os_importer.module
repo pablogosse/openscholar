@@ -561,6 +561,37 @@ function os_importer_import($form, &$form_state, $type) {
  * RSS address and a title for the node importer..
  */
 function os_importer_import_validate($form, $form_state) {
+
+  // Checking uploaded csv files for events.
+  if ($form_state['values']['format'] == 'csv' && $form_state['type'] == 'event') {
+  	// Load the uploaded csv file and parse its content with ParserCSV class.
+    $file = file_load($form_state['values']['file']);
+    feeds_include_library('ParserCSV.inc', 'ParserCSV');
+    $parser = new ParserCSV();
+    $parser->setDelimiter(',');
+    $iterator = new ParserCSVIterator($file->uri);
+    $rows = $parser->parse($iterator);
+    if (count($rows) < 2) {
+      form_set_error('file', t('The import file does not contain any events.'));
+    }
+  }
+
+  // Checking uploaded ics files for events.
+  if ($form_state['values']['format'] == 'ical') {
+    // Load the uploaded ics file and parse its content with iCalcreator class.
+    $file = file_load($form_state['values']['file']);
+    $file_content = file_get_contents($file->uri);
+    $config = array(
+      'unique_id' => '',
+      'filename' => $file->uri,
+    );
+    module_load_include('php', 'os_events', 'iCalcreator/iCalcreator.class');
+    $calendar = new vcalendar($config);
+    if (!$calendar->parse($file_content)) {
+      form_set_error('file', t('The import file does not contain any events.'));
+    }
+  }
+
   if ($form_state['values']['format'] == 'rss') {
     if (empty($form_state['values']['title'])) {
       form_set_error('title', t('The title field is required'));

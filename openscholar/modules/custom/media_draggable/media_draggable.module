@@ -188,19 +188,14 @@ function media_draggable_field_widget_process($element, &$form_state, &$form) {
     foreach (element_children($element) as $c) {
       if (is_numeric($c)) {
         $current[$c] = $element[$c]['fid']['#default_value'];
+        unset($element[$c]);
       }
     }
     foreach ($copy as $k => $f) {
       $new[$k] = $f['fid'];
     }
-    $removed = array_diff($current, $new);
-    $added = array_diff($new, $current);
 
-    foreach ($removed as $k => $fid) {
-      unset($element[$k]);
-    }
-
-    foreach ($added as $k => $fid) {
+    foreach ($new as $k => $fid) {
       $temp = $element['template'];
       $temp['fid']['#default_value'] = $fid;
       $temp['#file'] = file_load($fid);

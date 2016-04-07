@@ -318,7 +318,7 @@ fieldset.pin-fieldset legend a,
 .pin-button,
 fieldset.pin-fieldset legend,
 #user-login fieldset legend {
-    background-color: none;
+    background-color: transparent;
     margin: 15px 0 0;
 }
 #user-login fieldset,
@@ -346,7 +346,7 @@ fieldset#edit-pin-fieldset {
     border: 1px solid #e1e1e1;
     z-index: 2;
 }
->>>>>>> SCHOLAR-3.x
+
 .pin-button#pin-nvm {
     display: block;
     margin-bottom: 20px;

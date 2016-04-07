@@ -73,6 +73,21 @@
          </choose>
       </group>
    </macro>
+   <macro name="container-prefix">
+    <text term="in" text-case="capitalize-first"/>
+   </macro>
+   <macro name="container-title">
+    <choose>
+      <if type="chapter paper-conference" match="any">
+        <text macro="container-prefix" suffix=" "/>
+      </if>
+    </choose>
+    <choose>
+      <if type="legal_case" match="none">
+        <text variable="container-title" text-case="title" font-style="italic"/>
+      </if>
+    </choose>
+   </macro>
    <macro name="collection-title">
       <text variable="collection-title" text-case="title"/>
       <text variable="collection-number" prefix=", "/>
@@ -378,6 +393,7 @@
             <text macro="title-note"/>
             <text macro="editor-translator"/>
             <text macro="collection-title"/>
+	     <text macro="container-title" prefix=". "/>
             <text macro="volume"/>
          </group>
          <text macro="issue-note"/>

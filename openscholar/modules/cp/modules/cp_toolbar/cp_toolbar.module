@@ -87,22 +87,25 @@ function cp_toolbar_view() {
       $links['account']['attributes']['class'][] = 'active';
     }
 
-    if (module_exists('vsite') && user_access('subscribe as support team') && $vsite = vsite_get_vsite()) {
-      if (!og_is_member('node', $vsite->id)) {
-        $links['support_team_subscribe'] = array(
-          'title' => t('Support @purl', array('@purl' => $vsite->group->purl)),
-          'href' => 'group/node/' . $vsite->id . '/subscribe/vsite_support_expire',
-          'description' => t('Subscribe to group for support'),
-          'query' => drupal_get_destination()
-        );
-      }
-      else {
-        $links['support_team_unsubscribe'] = array(
-          'title' => t('Unsubscribe @purl' , array('@purl' => $vsite->group->purl)),
-          'href' => 'group/node/' . $vsite->id . '/unsubscribe',
-          'description' => t('Un-Subscribe from group'),
-          'query' => drupal_get_destination()
-        );
+    if (module_exists('vsite') && $vsite = vsite_get_vsite()) {
+      $admin = $vsite->og->uid == $user->uid || og_user_access('node', $vsite->id, 'administer group', $user);
+      if (!$admin && user_access('subscribe as support team')) {
+        if (!og_is_member('node', $vsite->id)) {
+          $links['support_team_subscribe'] = array(
+            'title' => t('Support @purl', array('@purl' => $vsite->group->purl)),
+            'href' => 'group/node/' . $vsite->id . '/subscribe/vsite_support_expire',
+            'description' => t('Subscribe to group for support'),
+            'query' => drupal_get_destination(),
+          );
+        }
+        else {
+          $links['support_team_unsubscribe'] = array(
+            'title' => t('Unsubscribe @purl' , array('@purl' => $vsite->group->purl)),
+            'href' => 'group/node/' . $vsite->id . '/unsubscribe',
+            'description' => t('Un-Subscribe from group'),
+            'query' => drupal_get_destination(),
+          );
+        }
       }
     }
   }

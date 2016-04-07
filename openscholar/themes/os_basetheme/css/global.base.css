@@ -1051,3 +1051,8 @@ div.error:before {
     bottom: 0;
     left: 10px;
 }
+ul.no-event-export {
+    width: 200px;
+    left: -110px;
+    font-size: 12px;
+}

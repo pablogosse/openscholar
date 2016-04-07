@@ -52,7 +52,7 @@ function admin_panel_library() {
   // Includes resources needed to create the admin panel.
   $libs['admin_panel'] = array(
     'title' => 'Admin Panel libraries',
-    'version' => '0.0.1',
+    'version' => '0.0.2',
   );
 
   $perms = isset($perm[$user->uid]) ? $perm[$user->uid] : array();
@@ -75,7 +75,7 @@ function admin_panel_library() {
           'keep_open' => _admin_panel_persist_open(),
         ),
         'version' => array(
-          'adminPanel' => '0.0.9'
+          'adminPanel' => '0.0.10'
         ),
       ),
       'type' => 'setting',
@@ -85,6 +85,7 @@ function admin_panel_library() {
   $libs['admin_panel']['dependencies'] = array(
     array('os_common', 'auth'),
     array('os_common', 'helpers'),
+    array('os_common', 'RecursionHelper')
   );
 
   $libs['admin_panel']['css'] = array(
@@ -142,43 +143,18 @@ function admin_panel_admin_paths() {
 }
 
 /**
- * Implements hook_cp_settings().
- *
- * Temp allow admin panel to be enbabled conditionally
- */
-function admin_panel_cp_settings() {
-  $setting = array();
-  $setting['admin_panel_enabled'] = array(
-    'group' => array(
-      '#title' => t('UX/UI Beta Options'),
-      '#id' => 'ux-ui',
-    ),
-    'form' => array(
-      '#type' => 'checkbox',
-      '#default_value' => variable_get('admin_panel_enabled', FALSE),
-      '#title' => t('Enable the Admin Panel Beta'),
-      '#description' => t('Checking this will switch this site to use the new beta admin panel.  This will impact all users of this site.  Deselecting will revert to the old menu.'),
-      // Use existing access permission since this is just temporary.
-      '#access' => user_access('change vsite domain'),
-    ),
-  );
-
-  return $setting;
-}
-
-/**
  * Return the cases when the user is performing an admin action.
  */
 function _admin_panel_persist_open() {
   $on_public_site = context_isset('context', 'os_public');
-  
+
   //Always persist in cp
   if(!$on_public_site) return true;
-  
+
 //   if (!empty($_SERVER["HTTP_REFERER"])) {
 //     $referer = parse_url($_SERVER["HTTP_REFERER"]);
 //     $referer = purl_get_normal_path($referer['path']);
-    
+
 //     $open_paths = array(
 //       'user',
 //       'node/*/edit',
@@ -189,12 +165,12 @@ function _admin_panel_persist_open() {
 //       return true;
 //     }
 //   }
-  
+
   //We passed a param to force the menu to persist.
   if(!empty($_GET['admin_panel'])) {
     return true;
   }
-  
+
   return false;
 }
 
@@ -204,7 +180,7 @@ function _admin_panel_persist_open() {
  * Rewrites path to add admin_panel state.
  */
 function admin_panel_url_outbound_alter(&$path, &$options, $original) {
-   
+
   $always_open_pages = array(
       'user',
       'user/pin',
@@ -226,7 +202,7 @@ function admin_panel_url_outbound_alter(&$path, &$options, $original) {
  *
  */
 function admin_panel_module_implements_alter(&$implementations, $hook) {
-  
+
   if ($hook == 'url_outbound_alter') {
     // Make the admin_panel implementation last so os will be done.
     // override the "/user" page callback.
@@ -236,7 +212,7 @@ function admin_panel_module_implements_alter(&$implementations, $hook) {
 }
 
 function admin_panel_drupal_goto_alter(&$path, &$options, &$http_response_code) {
-  
+
   //If we are in an overlay, and redirecting to a regular page, keep the admin panel open.
   if (module_exists('overlay') && overlay_get_mode() == 'child' && !path_is_admin($path) && !url_is_external($path)) {
     $options['query']['admin_panel'] = '1';

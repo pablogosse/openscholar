@@ -1,0 +1,15 @@
+<?php
+
+
+/**
+ * Enables the Admin Panel for all sites
+ */
+function admin_panel_update_7001($ctx) {
+  variable_set('admin_panel_enabled', 1);
+  $rows_deleted = db_delete('spaces_overrides')
+    ->condition('object_type', 'variable')
+    ->condition('object_id', 'admin_panel_enabled')
+    ->execute();
+
+  return t("$rows_deleted 'admin_panel_enabled' overrides have been removed.");
+}
