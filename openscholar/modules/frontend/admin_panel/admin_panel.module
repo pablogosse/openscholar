@@ -190,6 +190,7 @@ function admin_panel_url_outbound_alter(&$path, &$options, $original) {
   // only when there is a destination
   // only alter login path if the user is logged
   // out, otherwise it is a link to "My account"
+  global $user;
   if (!in_array($path, $always_open_pages) || empty($options['query']['destination']) || ($path == 'user' && $user->uid)) {
     return;
   }

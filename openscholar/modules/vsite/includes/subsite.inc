@@ -14,14 +14,16 @@
 function vsite_subsite_access($op = 'create', $vsite = false){
 
   if (!$vsite) {
-    $vsite = spaces_get_space();
+    $vsite = vsite_get_vsite();
   }
 
   $subsite_parents = variable_get('subsite_parents',array('department', 'project'));
   // Account for Space and Node
   $type = isset($vsite->group)? $vsite->group->type : $vsite->type;
 
-  return ($vsite && in_array($type,$subsite_parents) && spaces_access_admin() && user_access("{$op} subsites"));
+  global $user;
+
+  return ($vsite && in_array($type,$subsite_parents) && spaces_access_admin($user, vsite_get_vsite($vsite->nid)) && og_user_access("node", $vsite->nid, $user, "{$op} subsites"));
 }
 
 /**

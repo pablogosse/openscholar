@@ -7,10 +7,10 @@
 		<div ng-repeat="(key, site) in filtered = (site_data | filter:{owner: own}:strict) | limitTo: pageSize: pageSize * currentPage[key]" class="site-list">
 			<table class="table-shading">
 				<tr>
-				<td class="site-name"><a href="/node/{{ site.id }}" class="text_link">{{ site.title }}</a></td>
-				<td class="user-site-controls"><a ng-show="site.subsite_access" href="/site/register?parent={{ site.id }}" class="btton add">Add subsite</a>
-				<a ng-show="site.delete_access" href="/{{ site.purl }}/node/{{ site.id }}/delete" class="btton remove">Delete</a>
-				<a ng-show="! site.delete_access" href="/{{ site.purl }}/os/vsite/delete/{{ site.id }}" class="btton remove">Delete</a></td>
+				<td class="site-name"><a href="{{baseUrl}}node/{{ site.id }}" class="text_link">{{ site.title }}</a></td>
+				<td class="user-site-controls"><a ng-show="site.subsite_access" href="{{baseUrl}}site/register?parent={{ site.id }}" class="btton add">Add subsite</a>
+				<a ng-show="site.delete_access" href="{{baseUrl + site.purl }}/node/{{ site.id }}/delete" class="btton remove">Delete</a>
+				<a ng-show="!site.delete_access && site.owner" href="{{baseUrl + site.purl }}/os/vsite/delete/{{ site.id }}" class="btton remove">Delete</a></td>
 			</tr>
 			</table>
 		</div>
