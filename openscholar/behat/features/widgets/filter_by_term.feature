@@ -8,7 +8,7 @@ Feature:
         | Vocabularies           | authors             | select list |
         | Show empty terms       | check               | checkbox    |
         | Show child terms       | check               | checkbox    |
-        | Taxonomy tree depth.   | Show all children   | select list |
+        | Taxonomy tree depth    | Show all children   | select list |
         | Show number of posts   | uncheck             | checkbox    |
      When I visit "john/publications"
      Then I should see "Filter by term"
@@ -60,7 +60,7 @@ Feature:
         | Vocabularies         | authors   | select list |
         | Show empty terms     | check     | checkbox    |
         | Show child terms     | check     | checkbox    |
-        | Taxonomy tree depth. | 2nd Level | select list |
+        | Taxonomy tree depth  | 2nd Level | select list |
       And I visit "john/publications"
       And I should see "Antoine de Saint-Exupéry"
       And I should see "Stephen William Hawking"
@@ -69,7 +69,7 @@ Feature:
         | Vocabularies         | authors   | select list |
         | Show empty terms     | check     | checkbox    |
         | Show child terms     | check     | checkbox    |
-        | Taxonomy tree depth. | 3rd Level | select list |
+        | Taxonomy tree depth  | 3rd Level | select list |
      When I visit "john/publications"
      Then I should see "Antoine de Saint-Exupéry"
       And I should see "Stephen William Hawking"
@@ -157,9 +157,9 @@ Feature:
       And I bind the content type "event" with "science"
       And I assign the node "John F. Kennedy birthday" with the type "event" to the term "air"
       And the widget "Filter by term" is set in the "News" page with the following <settings>:
-        | Post types           | Select post type   | select list |
-        | Vocabularies         | science            | select list |
-        | Select Post type     | Past event         | select list |
+        | Post types    | Select post type   | select list |
+        | Vocabularies  | science            | select list |
+        | Type          | Past event         | select list |
      When I visit "john/news"
       And I should see "Air (1)"
       And I click "Air (1)"
@@ -172,9 +172,9 @@ Feature:
     Given I am logging in as "john"
       And I bind the content type "event" with "authors"
       And the widget "Filter by term" is set in the "News" page with the following <settings>:
-        | Post types           | Select post type   | select list |
-        | Vocabularies         | authors            | select list |
-        | Select Post type     | Upcoming event     | select list |
+        | Post types   | Select post type   | select list |
+        | Vocabularies | authors            | select list |
+        | Type         | Upcoming event     | select list |
      When I visit "john/news"
       And I should see "Antoine de Saint-Exupéry (1)"
       And I click "Antoine de Saint-Exupéry (1)"

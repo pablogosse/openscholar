@@ -444,6 +444,10 @@ projects[wysiwyg_filter][subdir] = "contrib"
 projects[wysiwyg_filter][version] = 1.6-rc2
 
 ; Libraries.
+libraries[jquery.bgiframe][type] = "libraries"
+libraries[jquery.bgiframe][download][type] = "git"
+libraries[jquery.bgiframe][download][url] = "https://github.com/brandonaaron/bgiframe.git"
+
 libraries[clippy][type] = "libraries"
 libraries[clippy][download][type] = "file"
 libraries[clippy][download][url] = "https://github.com/mojombo/clippy/archive/master.zip"

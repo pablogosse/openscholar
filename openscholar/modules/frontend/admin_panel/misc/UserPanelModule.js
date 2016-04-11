@@ -46,11 +46,13 @@
         var url = paths.api + '/users/' + user_data.uid;
         $http({method: 'get', url: url}).
           then(function(response) {
-        	if(typeof(response.data.data[0].og_user_node) == 'undefined') {
-        	  $scope.site_data = [];
-        	} else {
+            if(typeof(response.data.data[0].og_user_node) == 'undefined') {
+              $scope.site_data = [];
+            } else {
               $scope.site_data = response.data.data[0].og_user_node;
-        	}
+            }
+
+            $scope.create_access = response.data.data[0].create_access;
           });
           $scope.pageSize = 7;
           $scope.numberOfPages=function(data){
@@ -113,39 +115,42 @@
               }
 	        }
 
-            /* Add a permanent "stop" node to the end of the list. */
-            var lastEntryContent = "There are no new announcements. Click here to view the <a href=\"http://hwp.harvard.edu/os-alerts/announcement\">archive</a>.";
-            var lastEntry = {
-                 author: "scholar",
-                 categories: [],
-                 content: lastEntryContent,
-                 contentSnippet: lastEntryContent,
-                 publisheddDate: "Fri, 1 Jan 1971 00:00:00 -0800",
-                 title: "No new announcements."
-            };
-            var lastItem = osTour.notifications_item(lastEntry, num_remaining, count_element, link, hideTeaser = true);
-            items.push(lastItem);
+          /* Add a permanent "stop" node to the end of the list. */
+          var lastEntryContent = "There are no new announcements. Click here to view the <a href=\"http://hwp.harvard.edu/os-alerts/announcement\">archive</a>.";
+          var lastEntry = {
+               author: "scholar",
+               categories: [],
+               content: lastEntryContent,
+               contentSnippet: lastEntryContent,
+               publisheddDate: "Fri, 1 Jan 1971 00:00:00 -0800",
+               title: "No new announcements."
+          };
+          var lastItem = osTour.notifications_item(lastEntry, num_remaining, count_element, link, true);
+          var trueCount = items.length;
+          items.push(lastItem);
 
           var tour = {};
-	        // If there are new items
-	        if (items.length) {
-	          // Sets up the DOM elements.
-	          element.append(count_element);
-	          osTour.notifications_count(count_element, items.length);
-	            //$('#os-tour-notifications-menu-link').slideDown('slow');
-	          
-	          // Sets up the tour object with the loaded feed item steps.
-	          tour = {
-	            showPrevButton: true,
-	            scrollTopMargin: 100,
-	            id: "os-tour-notifications",
-	            steps: items,
-	            onEnd: function() {
-                  osTour.notifications_count(count_element, -1);
-	              osTour.notifications_read_update();
-	            }
-	          };
-	        }
+          // If there are new items
+          if (items.length) {
+            // Sets up the DOM elements.
+            if (trueCount) {
+              element.append(count_element);
+              osTour.notifications_count(count_element, trueCount);
+            }
+              //$('#os-tour-notifications-menu-link').slideDown('slow');
+
+            // Sets up the tour object with the loaded feed item steps.
+            tour = {
+              showPrevButton: true,
+              scrollTopMargin: 100,
+              id: "os-tour-notifications",
+              steps: items,
+              onEnd: function() {
+                osTour.notifications_count(count_element, -1);
+                osTour.notifications_read_update();
+              }
+            };
+          }
           else {
             oldItems.reverse();
 

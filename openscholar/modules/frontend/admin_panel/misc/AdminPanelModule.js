@@ -10,7 +10,7 @@
     angular.module('AdminPanel', [ 'os-auth', 'ngCookies','ngStorage', 'RecursionHelper'])
     .config(function () {
        paths = Drupal.settings.paths
-       vsite = Drupal.settings.spaces.id || 0;
+       vsite = typeof Drupal.settings.spaces != 'undefined' ? Drupal.settings.spaces.id : 0;
        cid = Drupal.settings.admin_panel.cid + Drupal.settings.version.adminPanel;
        uid = Drupal.settings.admin_panel.user;
        auto_open = Drupal.settings.admin_panel.keep_open;
@@ -51,6 +51,7 @@
             morphButton.openTransition = false;
             morphButton.toggle();
             morphButton.openTransition = true;
+            jQuery('.morph-button').addClass('scroll');
           },1);  
           
           window.setTimeout(function () {
@@ -87,6 +88,7 @@
 
         	//Set the menu state to closed.
             menu_state.main = true;
+            jQuery('.morph-button').addClass('scroll');
           }
         }); 
       

@@ -74,9 +74,7 @@
     transition: opacity 0s 0s;
 }
 
-.morph-button-fixed.active > button {
-    z-index: 2000;
-}
+
 .morph-button-fixed.active .morph-content {
     z-index: 1900;
 }
@@ -177,7 +175,7 @@
 .morph-button-sidebar.open .morph-content {
     top: 0 !important;
     left: 0 !important;
-    width: 130px;
+    width: 135px;
     height: 100%;
     overflow: hidden;
     -webkit-backface-visibility: hidden;

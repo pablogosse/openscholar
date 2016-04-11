@@ -576,6 +576,11 @@ function _citation_distribute_plugins() {
     return $plugin_sorted;
   }
 
+  // In case we have no plugins.
+  if (!$plugins) {
+    return array();
+  }
+
   // Iterating through plugins having plugin title. 
   foreach ($plugins as $key => $plugin) {
     if (isset($plugin['title'])) {

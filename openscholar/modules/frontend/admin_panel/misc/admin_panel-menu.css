@@ -1,5 +1,6 @@
 .morph-button-sidebar .morph-content {
-    background: #111;
+    background: url('images/os-cp_button.png') no-repeat 47% 99%;
+    background-color: #111;
 }
 .morph-button > button {
     background: url('images/os-cp_button.png') no-repeat;
@@ -299,11 +300,20 @@ a {
     box-shadow: 3px 3px 3px 0px rgba(50, 50, 50, 0.3);
     padding: 3px 12px 12px;
 }
+
+.new-site-link {
+    position: absolute;
+    top: 32px;
+    right: 20px;
+}
 .account_tab_popout.user_sites {
     top: 28px;
 }
 .animated {
     animation-duration: 0s !important;
+}
+table {
+    font-size: 1em !important;
 }
 td.site-name {
     width: 58%;

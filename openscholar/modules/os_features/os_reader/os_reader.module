@@ -443,7 +443,7 @@ function os_reader_copy_feed_item_to_news($feed, $vsite) {
   $wrapper = entity_metadata_wrapper('node', $node);
   $wrapper->{OG_AUDIENCE_FIELD}->set(array($vsite->id));
   $wrapper->author->set($user->uid);
-  $wrapper->body->set(array('value' => $feed->description, 'format' => 'filtered_html'));
+  $new_description = $feed->description;
   $doc = new DOMDocument();
   $doc->encoding = 'utf-8';
 
@@ -454,7 +454,7 @@ function os_reader_copy_feed_item_to_news($feed, $vsite) {
     // todo: use os_copy_file();
     try {
       if ($feed->description) {
-        $doc->loadHTML(mb_convert_encoding($feed->description, 'HTML-ENTITIES', "UTF-8"));
+        $doc->loadHTML(mb_convert_encoding($new_description, 'HTML-ENTITIES', "UTF-8"));
         $images = $doc->getElementsByTagName('img')->item(0);
         $extenstions = array('gif', 'png', 'jpg', 'jpeg');
 
@@ -466,7 +466,7 @@ function os_reader_copy_feed_item_to_news($feed, $vsite) {
           }
           // Images are found so delete the tags from the description before
           // assigning it to the body of the node.
-          $feed->description = preg_replace('/<img[^>]+\>/i', '', $feed->description);
+          $new_description = preg_replace('/<img[^>]+\>/i', '', $new_description);
         }
       }
     }
@@ -483,7 +483,7 @@ function os_reader_copy_feed_item_to_news($feed, $vsite) {
 
   // Remove style attribute from div tags anv p tags.
   if (property_exists($feed, 'description')) {
-    $doc->loadHTML(mb_convert_encoding($feed->description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED);
+    $doc->loadHTML(mb_convert_encoding($new_description, 'HTML-ENTITIES', "UTF-8"), LIBXML_HTML_NOIMPLIED);
     $xpath = new DOMXPath($doc);
     $items = $xpath->query("//*[(local-name()='div' or local-name()='span') and @style]");
 
@@ -498,7 +498,7 @@ function os_reader_copy_feed_item_to_news($feed, $vsite) {
       $item->parentNode->removeChild($item);
     }
 
-    $feed->description = $doc->saveHTML($doc->documentElement);
+    $new_description = $doc->saveHTML($doc->documentElement);
 
     $reduce_brs = function($string) use(&$reduce_brs) {
 
@@ -521,10 +521,10 @@ function os_reader_copy_feed_item_to_news($feed, $vsite) {
       return $string;
     };
 
-    $feed->description = $reduce_brs($feed->description);
+    $new_description = $reduce_brs($new_description);
   }
 
-  $wrapper->body->set(array('value' => $feed->description, 'format' => 'filtered_html'));
+  $wrapper->body->set(array('value' => $new_description, 'format' => 'filtered_html'));
   $wrapper->save();
 
   // Reference the feed to the VSite.

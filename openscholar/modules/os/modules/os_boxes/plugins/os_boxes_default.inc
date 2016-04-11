@@ -145,11 +145,11 @@ abstract class os_boxes_default extends boxes_box {
       return;
     }
 
-    $this->cache_id = 'os_boxes_cache:' . $vsite->id;
+    $this->cache_id = 'os_boxes_cache:' . $vsite->id . ':' . $this->delta;
+
     if ($bundle && is_string($bundle)) {
       $this->cache_id .= ':' . $bundle;
     }
-    $this->cache_id .= ':' . $this->delta;
 
     if ($page) {
       $this->cache_id .= ':' . $page;

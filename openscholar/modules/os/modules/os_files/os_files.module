@@ -433,7 +433,13 @@ function os_files_upload_validate_file_type(stdclass $file, $types) {
 function os_files_upload_validate_image_dimensions(stdClass $file) {
   $errors = array();
 
-  if (file_get_type($file) != 'image') return $errors;
+  $memory_limit = ini_get('memory_limit');
+
+  if (file_get_type($file) != 'image' || $memory_limit == -1) {
+    return $errors;
+  }
+
+  $memory_limit = parse_size($memory_limit);
 
   // estimate code from devshed
   // see: http://forums.devshed.com/php-development-5/gd-image-resizing-memory-requirements-605060.html
@@ -446,7 +452,6 @@ function os_files_upload_validate_image_dimensions(stdClass $file) {
 
   $memory_to_process = $memory_needed * 2;    // gross overestimate, but to be safe
 
-  $memory_limit = parse_size(ini_get('memory_limit'));
   $memory_drupal = parse_size('100MB'); // estimate how much memory Drupal will use
   $available_memory = $memory_limit - $memory_drupal;
 

@@ -10,8 +10,8 @@ Feature:
   Examples:
     | request-url                     | text                                                |
     | "einstein"                      | "Einstein"                                          |
-    | "einstein/blog"                 | "Mileva Marić"                                      |
-    | "einstein/blog/mileva-marić"    | "Yesterday I met Mileva, what a nice girl :)."      |
+    | "einstein/blog"                 | "Mileva Maric"                                      |
+    | "einstein/blog/mileva-Maric"    | "Yesterday I met Mileva, what a nice girl :)."      |
 
   @api @vsite
   Scenario: Testing private vsite cannot be seen by anonymous users.
@@ -37,7 +37,7 @@ Feature:
       And I press "Join"
      Then I should see "Your subscription request was sent."
 
-  @api @vsite
+  @api
   Scenario: Testing unsubscribing a support team member.
     Given I am logging in as "bill"
       And I go to "obama"

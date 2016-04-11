@@ -39,7 +39,7 @@ Feature:
      When I visit "john/publications"
       And I should see the publication "Philosophers Stone" comes before "Goblet of Fire"
 
-  @api @features_second
+  @api @wip
   Scenario: Verify anonymous users can't export publications using the main
             export link in the "publications" page but only through the link for
             a single publication.

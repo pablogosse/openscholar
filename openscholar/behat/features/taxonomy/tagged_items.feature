@@ -42,7 +42,7 @@ Feature: Testing the tagged items.
       And the widget "Filter by term" is set in the "Calendar" page with the following <settings>:
         | Vocabularies          | authors             | select list |
         | Post types            | Select post type    | select list |
-        | Select Post type      | Upcoming event      | select list |
+        | Type                  | Upcoming event      | select list |
         | Show number of posts  | check               | checkbox    |
       And I visit "john/calendar"
       And I should see "Stephen William Hawking (3)"

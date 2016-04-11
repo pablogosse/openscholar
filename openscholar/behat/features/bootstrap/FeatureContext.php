@@ -1,5 +1,6 @@
 <?php
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Drupal\DrupalExtension\Context\DrupalContext;
 use Behat\Behat\Context\Step\Given;
 use Behat\Gherkin\Node\TableNode;
@@ -15,6 +16,16 @@ define("BEHAT_ERROR_REPORTING", E_ALL ^ E_NOTICE ^ E_WARNING);
 class FeatureContext extends DrupalContext {
 
   use RestfulTrait;
+
+  public function beforeScenario($event) {
+    // Set up the browser width.
+
+    if ($this->getSession() instanceof Selenium2Driver) {
+      $this->getSession()->resizeWindow(1440, 1200, 'current');
+    }
+
+    parent::beforeScenario($event);
+  }
 
   /**
    * Variable for storing the random string we used in the text.
@@ -271,7 +282,15 @@ class FeatureContext extends DrupalContext {
    */
   public function iShouldPrintPage() {
     $element = $this->getSession()->getPage();
-    print_r($element->getContent());
+    $request = $this->invokeRestRequest('post', 'https://api.github.com/gists', [], [
+      'description' => 'http log',
+      'public' => TRUE,
+      'files' => [
+        'file.html' => ['content' => $element->getContent()],
+      ],
+    ]);
+    $json = $request->json();
+    print_r('You asked to see the page content. Here is a gist contain the html: ' . $json['files']['file.html']['raw_url']);
   }
   /**
    * @Then /^I should print page to "([^"]*)"$/
@@ -1005,6 +1024,14 @@ class FeatureContext extends DrupalContext {
       ->propertyCondition('name', 'Harvard Graduate School of Design')
       ->range(0, 1)
       ->execute();
+
+    print_r($result);
+
+    $result = $query
+      ->entityCondition('entity_type', 'taxonomy_term')
+      ->execute();
+
+    print_r($result);
 
     $entity = entity_create('field_collection_item', array('field_name' => 'field_department_school'));
     $entity->setHostEntity('node', node_load(FeatureHelp::getNodeId('john')));
@@ -2227,7 +2254,7 @@ class FeatureContext extends DrupalContext {
   public function iFillInTheFieldWithTheNode($id, $title) {
     $nid = FeatureHelp::getNodeId($title);
     $element = $this->getSession()->getPage();
-    $value = $title . ' (' . $nid . ')';
+    $value = $title . ' [' . $nid . ']';
     $element->fillField($id, $value);
   }
 
@@ -2492,6 +2519,10 @@ class FeatureContext extends DrupalContext {
    * @Then /^I should see the media browser "([^"]*)" tab is active$/
    */
   public function iShouldSeeTabActive($tab) {
+    // Js is async may take up to 3 sec to appear. so we wait.
+    $duration = 5000;
+    $this->getSession()->wait($duration);
+    // In case element doesn't exists.
     if (!($elem = $this->getSession()->getPage()->find('css', '.media-browser-button.active'))) {
       throw new Exception('No Media Browser tab is active.');
     }
@@ -2767,8 +2798,7 @@ class FeatureContext extends DrupalContext {
    */
   public function iClickOnTheTab($arg1) {
     $element = $this->getSession()->getPage()->find('xpath', "//*[.='{$arg1}']");
-    $element->click();
-
+    $element->press();
   }
 
   /**
@@ -3142,6 +3172,21 @@ class FeatureContext extends DrupalContext {
         throw new \Exception(format_string("The '@metatag' metatag expected url is: '@metatag_expected_url' but the given url is: '@metatag_given_url'", $variables));
       }
     }
+  }
+
+  /**
+   * @Given /^I adding the embedded video$/
+   */
+  public function iAddingTheEmbeddedVideo() {
+    $page = $this->getSession()->getPage();
+    $page->find('xpath', "//button[.='Insert']")->press();
+  }
+
+  /**
+   * @Given /^I logout$/
+   */
+  public function iLogout1() {
+    $this->getSession()->visit($this->locatePath('/user/logout'));
   }
 
 }

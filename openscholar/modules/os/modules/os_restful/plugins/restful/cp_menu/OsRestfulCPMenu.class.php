@@ -54,6 +54,7 @@ class OSRestfulCPMenu extends \RestfulBase implements \RestfulDataProviderInterf
    * {@inheritdoc}
    */
   public function access() {
+    return true;  // access on each link is checked individually. we don't need to allow/deny the whole menu anymore.
     $account = $this->getAccount();
     return user_access('adminsiter site configuration', $account) || $this->checkGroupAccess();;
   }
@@ -72,7 +73,7 @@ class OSRestfulCPMenu extends \RestfulBase implements \RestfulDataProviderInterf
     if ($vsite) {
       return user_access('administer spaces', $account) || og_is_member('node', $vsite, 'user', $account);
     } else {
-      $this->throwException('The vsite ID is missing.');
+      return false;
     }
 
     return false;
@@ -326,15 +327,15 @@ class OSRestfulCPMenu extends \RestfulBase implements \RestfulDataProviderInterf
         'type' => 'heading',
         'default_state' => 'collapsed',
         'children' => array(
+            'layout' => array(
+                'label' => 'Layout',
+                'type' => 'link',
+                'href' => 'cp/build/layout'
+            ),
             'themes' => array(
               'label' => 'Themes',
               'type' => 'link',
               'href' => 'cp/appearance'
-            ),
-            'layout' => array(
-              'label' => 'Layout',
-              'type' => 'link',
-              'href' => 'cp/build/layout'
             ),
 //            'theme_settings' => array(
 //              'label' => 'Theme Settings',
@@ -377,15 +378,15 @@ class OSRestfulCPMenu extends \RestfulBase implements \RestfulDataProviderInterf
         'type' => 'heading',
         'default_state' => 'collapsed',
         'children' => array(
-          'support' => array(
-            'label' => 'Support',
-            'type' => 'link',
-            'href' => 'cp/support'
-          ),
           'documentation' => array(
             'label' => 'Documentation',
             'type' => 'link',
             'href' => 'cp/welcome'
+          ),
+          'support' => array(
+            'label' => 'Support',
+            'type' => 'link',
+            'href' => 'cp/support'
           ),
         ),
       ),

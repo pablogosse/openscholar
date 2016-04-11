@@ -82,6 +82,20 @@ function os_faq_settings($form, $form_state) {
     '#weight' => -1
   );
 
+  $form['faq_sort'] = array(
+    '#type' => 'radios',
+    '#title' => t('By default, sort FAQs by which category'),
+    '#default_value' => variable_get('faq_sort', 'created'),
+    '#options' => array('created' => t('Created date'), 'title' => t('Alphabetical')),
+  );
+
+  $form['faq_order'] = array(
+    '#type' => 'radios',
+    '#title' => t('Select default order of the sort category'),
+    '#default_value' => variable_get('faq_order', 'DESC'),
+    '#options' => array('DESC' => t('Descending'), 'ASC' => t('Ascending')),
+  );
+
   return system_settings_form($form);
 }
 
@@ -126,4 +140,14 @@ function os_faq_preprocess_node(&$vars) {
  **/
 function os_faq_os_entity_view_modes_alter(&$info) {
   $info['node']['faq'] = array_diff($info['node']['faq'], array('slide_teaser'));
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function os_faq_views_query_alter(&$view, &$query) {
+  if ($view->name == 'os_faq' && $view->current_display == 'page') {
+    $query->orderby[1]['field'] = 'node.' . variable_get('faq_sort', 'created');
+    $query->orderby[1]['direction'] = variable_get('faq_order', 'DESC');
+  }
 }

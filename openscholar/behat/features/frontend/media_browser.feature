@@ -6,6 +6,7 @@ Feature: Media Browser
     Given I am logging in as "john"
       And I wait for page actions to complete
       And I edit the entity "node" with title "About"
+      And I sleep for "10"
      When I click on the "Upload" control
       And I wait "1 second" for the media browser to open
      Then I should see "Select files to Add"
@@ -32,6 +33,7 @@ Feature: Media Browser
       And I wait "1 second" for the media browser to open
       And I should wait for the text "Please wait while we get information on your files." to "disappear"
      When I click on "Previously uploaded files" button in the media browser
+      And I press ">>"
      Then I should see "slideshow1.jpg"
 
   @media_browser @javascript
@@ -59,6 +61,7 @@ Feature: Media Browser
       And I should see "kitten-2.jpg" in a "div.media-row" element
       And I click on the tab "Upload from your computer"
       And I drop the file "duplicate/kitten-2.jpg" onto the "Drag and drop files here." area
+      And I sleep for "5"
      Then I should see the text "A file with the name 'kitten-2.jpg' already exists."
       And I press the "Replace" button
       And I should wait for "File Edit" directive to "appear"
@@ -78,6 +81,7 @@ Feature: Media Browser
       And I should see "kitten-2.jpg" in a "div.media-row" element
       And I click on the tab "Upload from your computer"
       And I drop the file "duplicate/kitten-2.jpg" onto the "Drag and drop files here." area
+      And I sleep for "5"
      Then I should see the text "A file with the name 'kitten-2.jpg' already exists."
       And I press the "Rename" button
       And I should wait for "File Edit" directive to "appear"
@@ -96,6 +100,7 @@ Feature: Media Browser
      And I should see "kitten-2.jpg" in a "div.media-row" element
      And I click on the tab "Upload from your computer"
      And I drop the file "kitten-2.jpg" onto the "Drag and drop files here." area
+     And I sleep for "5"
     Then I should wait for the text "A file with the name 'kitten-2.jpg' already exists." to "appear"
      And I press the "Cancel" button
      And I should see the media browser "Upload from your computer" tab is active
@@ -114,7 +119,7 @@ Feature: Media Browser
       And I wait "1 second" for the media browser to open
       And I should wait for the text "Please wait while we get information on your files." to "disappear"
       And I drop the files "rubber-duck.jpg, conservatory_of_flowers3.jpg" onto the "Drag and drop files here." area
-     Then I should see the media browser "Previously uploaded files" tab is active
+      And I sleep for "5"
       And I should see "rubber-duck.jpg" in a ".file-list-single" element
       And I should see "conservatory_of_flowers3.jpg" in a ".file-list-single" element
 
@@ -127,6 +132,7 @@ Feature: Media Browser
       And I wait "1 second" for the media browser to open
       And I should wait for the text "Please wait while we get information on your files." to "disappear"
       And I drop the files "rubber-duck.jpg, conservatory_of_flowers3.jpg" onto the "Drag and drop files here." area
+      And I sleep for "5"
      Then I should see "A file with the name 'rubber-duck.jpg' already exists."
       And I should see "1/2"
      When I press the "Cancel" button
@@ -162,8 +168,11 @@ Feature: Media Browser
       And I wait "1 second" for the media browser to open
       And I should wait for the text "Please wait while we get information on your files." to "disappear"
       And I drop the files "abc.pdf, kitten-2.jpg" onto the "Drag and drop files here." area
+      And I sleep for "10"
      Then I should see "A file with the name 'kitten-2.jpg' already exists."
-      And I press the "Cancel" button
+    # todo fix
+#      And I press the "Cancel" button
+      And I press the "Replace" button
       And I should see "abc.pdf" in a ".file-list-single" element
 
   @media_browser @javascript
@@ -178,8 +187,9 @@ Feature: Media Browser
       And I fill in "URL or HTML" with "https://youtu.be/jNQXAC9IVRw"
       And I press the "Submit" button
       And I should wait for "File Edit" directive to "appear"
-     Then the "Label" field should contain "Me at the zoo"
+     Then the "fe-file-name" field should contain "Me at the zoo"
       And I click on the "Save" control in the "div[file-edit]" element
+      And I adding the embedded video
       And I should see "Me at the zoo" in a ".file-list-single" element
 
   @media_browser @javascript

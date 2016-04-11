@@ -596,10 +596,18 @@ function os_profiles_sync_profile_validate($form, &$form_state) {
   if (!empty($form_state['values']['autocomplete'])) {
     preg_match("/.+\((\d+)\)/", $form_state['values']['autocomplete'], $matches);
     if (empty($matches[1])) {
-      $params = array(
-        '%label' => $form_state['values']['autocomplete'],
-      );
-      form_set_error('autocomplete', t("There isn't any node with the name %label", $params));
+
+      preg_match("/.+\[(\d+)\]/", $form_state['values']['autocomplete'], $matches);
+
+      if (empty($matches)) {
+        $params = array(
+          '%label' => $form_state['values']['autocomplete'],
+        );
+        form_set_error('autocomplete', t("There isn't any node with the name %label", $params));
+      }
+      else {
+        $form_state['autocomplete_nid'] = $matches[1];
+      }
     }
     else {
       $form_state['autocomplete_nid'] = $matches[1];
@@ -813,6 +821,10 @@ function os_profiles_get_origin_node_values($address, $fields) {
   $values = array();
 
   foreach ($fields as $field) {
+    if (!in_array($field, array_keys($data))) {
+      continue;
+    }
+
     $info = field_info_field($field);
     if (empty($data[$field])) {
       // The field value in the original node is empty. Entity metadata wrapper
@@ -821,7 +833,7 @@ function os_profiles_get_origin_node_values($address, $fields) {
       $value = $info['cardinality'] == 1 ? NULL : array(NULL);
     }
     else {
-      $value = $data[$field];
+      $value = empty($data[$field]) ? NULL : $data[$field];
     }
 
     $values[$field] = $value;

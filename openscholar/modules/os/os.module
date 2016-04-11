@@ -2798,6 +2798,7 @@ function _os_advagg_build_css_path($matches) {
  * Implements hook_page_build().
  */
 function os_page_build(&$page) {
+  global $user;
   $header = drupal_get_http_header('status');
   // Checking if currently displayed page has HTTP 403 access denied status in http header.
   if ($header == '403 Forbidden') {
@@ -2806,8 +2807,16 @@ function os_page_build(&$page) {
     // vsite purl will be a part of destination url.
     $redirect['destination'] = isset($vsite->group->purl) ? $vsite->group->purl . '/' . $redirect['destination'] : $redirect['destination'];
     $main_content_display = &drupal_static('system_main_content_added', FALSE);
-    $warning_msg = t('You are not authorized to access this page.');
-    $warning_msg .= '<br/>' . 'You need to ' . l('log in', 'user/login', array('query' => array('destination' => $redirect['destination']) )) . ' to access this page';
+
+    // If the user has logged in, but do not have access to view the page.
+    if ($user->uid) {
+      $warning_msg = t('Sorry, you are not authorized to access this page.<br/>Please contact the site owner to gain access.');
+    }
+    else {
+      $warning_msg = t('You are not authorized to access this page.');
+      $warning_msg .= '<br/>' . 'You need to ' . l('log in', 'user/login', array('query' => array('destination' => $redirect['destination']) )) . ' to access this page';
+    }
+    
     $page['content']['system_main']['main']['#markup'] = $warning_msg;
     $main_content_display = TRUE;
   }

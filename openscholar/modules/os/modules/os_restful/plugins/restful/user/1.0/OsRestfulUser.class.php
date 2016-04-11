@@ -30,6 +30,10 @@ class OsRestfulUser extends \RestfulEntityBaseUser {
       ),
     );
 
+    $public_fields['create_access'] = array(
+      'callback' => array($this, 'getCreateAccess')
+    );
+
     $ga_field = og_get_group_audience_fields('user','user','node');
     unset($ga_field['vsite_support_expire']);
 
@@ -72,6 +76,15 @@ class OsRestfulUser extends \RestfulEntityBaseUser {
       $return[$info->rid] = $info->name;
     }
     return $return;
+  }
+
+  /**
+   * Returns whether a user can create new sites or not
+   */
+  public function getCreateAccess() {
+    if (module_exists('vsite')) {
+      return _vsite_user_access_create_vsite();
+    }
   }
 
   /**

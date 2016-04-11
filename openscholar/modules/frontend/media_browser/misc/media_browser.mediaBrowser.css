@@ -524,11 +524,13 @@ div[file-edit] .control button,
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
+
 /*Media browser position set to fixed to show media browser in same position inspite of page scrolling.*/
 
 .ui-dialog.media-wrapper {
-    position: fixed;
+  position:fixed;
 }
+
 #media-browser-file-select {
-    font-size: 14px !important;
+  font-size: 14px !important;
 }

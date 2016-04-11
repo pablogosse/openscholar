@@ -2,7 +2,7 @@ Feature:
   Testing ability to subscribe as support team for privileged users,
   that creates an expirable membership.
 
-  @api @vsite
+  @api
   Scenario: Test subscribe for user with permission
     Given I am logging in as "bill"
     When I visit "obama"

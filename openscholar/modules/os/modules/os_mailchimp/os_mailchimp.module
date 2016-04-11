@@ -174,7 +174,6 @@ function os_mailchimp_subscribe_page($js=TRUE, $delta) {
  * @param $ln  user's lastname (optional)
  */
 function os_mailchimp_subscribe($api, $listid, $email, $fn=NULL, $ln=NULL) {
-  include_once( drupal_get_path('module', 'os_mailchimp') . '/MCAPI.class.php');
   $MC = new MCAPI($api);
 
   //vsite isn't created yet so we can't get its purl.  but user isn't subbed yet, so when
@@ -391,7 +390,6 @@ function _os_mailchimp_get_list_info($api) {
  *   Mailchimp api connection or False
  */
 function _os_mailchimp_mailchimp_connect($api) {
-  include_once( drupal_get_path('module', 'os_mailchimp') . '/MCAPI.class.php');
   $MC = new MCAPI($api);
   return ($MC) ? $MC : FALSE;
 }

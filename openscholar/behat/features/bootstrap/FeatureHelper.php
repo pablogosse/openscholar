@@ -232,8 +232,8 @@ class FeatureHelp {
    *    If the function called from CLI the function will print the string.
    */
   static public function setBoxInRegion($nid, $box, $page, $region = 'sidebar_second', $delta_suffix = '') {
+    $box_name = $box;
     ctools_include('layout', 'os');
-
     $contexts = array(
       self::$page_mapping[$page],
       'os_public',
@@ -260,7 +260,7 @@ class FeatureHelp {
 
       // Create the box.
       if (!$box = boxes_box::factory(self::$boxes_mapping[$box], $options)) {
-        throw new Exception(sprintf('The box %s failed to saved'), $box);
+        throw new Exception(sprintf('The box %s failed to saved', $box_name));
       }
       $box->save();
 

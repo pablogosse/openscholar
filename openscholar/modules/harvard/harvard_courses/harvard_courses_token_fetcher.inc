@@ -85,7 +85,14 @@ class HarvardFetcher extends FeedsFetcher {
 
     if ($result->code != 200) {
       // oops... error!
-      drupal_set_message(t('Unable to get feeds from : ' . $this->buildUrl($import_value, $rows, $start)));
+      $params = array(
+        '@url' => $this->buildUrl($import_value, $rows, $start),
+        '@error' => $result->error,
+        '@request' => $result->request,
+      );
+      $text = t('Unable to get feeds from: @url due to @error. The request information is @request', $params);
+      drupal_set_message($text);
+      watchdog('harvard_courses', $text);
       return new FeedsFetcherResult('<courses></courses>');
     }
 

@@ -15,5 +15,3 @@ Feature:
      Then I visit "john/publications"
       And I should see "bbbb"
       And I should not see "aaaa"
-
-

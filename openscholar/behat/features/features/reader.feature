@@ -1,5 +1,5 @@
 Feature:
-  Testing the OS reader functionallity.
+  Testing the OS reader functionality.
 
   @api @features_second
   Scenario: Test the Reader tab

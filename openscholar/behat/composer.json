@@ -1,4 +1,10 @@
 {
+  "repositories": [
+    {
+      "url": "https://github.com/jhedstrom/drupalextension.git",
+      "type": "git"
+    }
+  ],
   "require": {
     "drupal/drupal-extension": "v0.1.5",
     "behat/behat": "2.5.*@stable",
