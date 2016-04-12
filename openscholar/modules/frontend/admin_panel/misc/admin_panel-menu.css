@@ -220,7 +220,7 @@ body.overlay {
     right: 15px;
     padding: 10px;
     color: white;
-    background: #49505a;
+    background: #6C7A89;
     z-index: 10;
     display: inline-block;
     font-family: helvetica;
@@ -257,11 +257,9 @@ body.overlay {
     color: #215990;
 }
 #user-name {
-    background-color: #6C7A89;
+    background-color: #49505a;
 }
-#user-name:hover {
-    cursor: text;
-}
+
 .slate {
     background: #454545;
 }
@@ -345,7 +343,9 @@ td.user-site-controls {
     margin: 0 0 2px 97%;
 }
 .close-user-menu {
-    margin: 0 0 0px 90%;
+    position: absolute;
+    top: 6px;
+    right: 2px;
 }
 /* these need to be moved to the os_common dir */
 

@@ -1056,3 +1056,7 @@ ul.no-event-export {
     left: -110px;
     font-size: 12px;
 }
+.node-content .node-readmore {
+    display: inline-block;
+    clear: both;
+}

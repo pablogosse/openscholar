@@ -23,7 +23,7 @@ env:
     - TEST_SUITE=javscript
     - TEST_SUITE=misc_first
     - TEST_SUITE=misc_second
-#    - TEST_SUITE=solr
+    - TEST_SUITE=solr
     - TEST_SUITE=taxonomy
     - TEST_SUITE=vsite
     - TEST_SUITE=widgets
@@ -68,20 +68,20 @@ before_script:
   - mysql -e "SET GLOBAL wait_timeout=300;"
   - mysql -e "SHOW VARIABLES LIKE 'max_allowed_packet';"
 
-#  # Download and install Apache solr
-#  - wget https://archive.apache.org/dist/lucene/solr/3.6.2/apache-solr-3.6.2.zip
-#  - unzip -o apache-solr-3.6.2.zip
-#  - cd apache-solr-3.6.2/example/solr/conf
-#
-#  # Copy the solr config files from the apache solr module
-#  - yes | cp /home/travis/build/openscholar/openscholar/www/profiles/openscholar/modules/contrib/apachesolr/solr-conf/solr-3.x/* .
-#
-#  # Copy the modified solrconfig.xml file to commit records every 20 seconds so items will show up in search sooner
-#  - yes | cp /home/travis/build/openscholar/openscholar/www/profiles/openscholar/behat/solr/solrconfig.xml .
-#  - cd ../../
-#  - java -jar start.jar &
-#  - sleep 10
-#  - cd /home/travis/build/openscholar/openscholar
+  # Download and install Apache solr
+  - wget https://archive.apache.org/dist/lucene/solr/3.6.2/apache-solr-3.6.2.zip
+  - unzip -o apache-solr-3.6.2.zip
+  - cd apache-solr-3.6.2/example/solr/conf
+
+  # Copy the solr config files from the apache solr module
+  - yes | cp /home/travis/build/openscholar/openscholar/www/profiles/openscholar/modules/contrib/apachesolr/solr-conf/solr-3.x/* .
+
+  # Copy the modified solrconfig.xml file to commit records every 20 seconds so items will show up in search sooner
+  - yes | cp /home/travis/build/openscholar/openscholar/www/profiles/openscholar/behat/solr/solrconfig.xml .
+  - cd ../../
+  - java -jar start.jar &
+  - sleep 10
+  - cd /home/travis/build/openscholar/openscholar
 
   # Install a multi-tanent, development site.
   - cd www
@@ -102,14 +102,14 @@ before_script:
   - drush cc all
   - drush search-index
 
-#  # Index site using Apache solr
-#  - drush en os_search_solr -y
-#  - drush solr-mark-all
-#  - drush solr-index
-#
-#  # Trying to execute the internal solr commit
-#  - sleep 10
-#  - wget http://localhost:8983/solr/update?commit=true
+  # Index site using Apache solr
+  - drush en os_search_solr -y
+  - drush solr-mark-all
+  - drush solr-index
+
+  # Trying to execute the internal solr commit
+  - sleep 10
+  - wget http://localhost:8983/solr/update?commit=true
 
   # Copy Behat configuration file.
   - cd profiles/openscholar/behat
