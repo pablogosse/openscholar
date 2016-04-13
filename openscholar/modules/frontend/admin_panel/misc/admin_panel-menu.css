@@ -114,7 +114,7 @@ body.overlay {
 #cssmenu > ul > li > span {
     cursor: pointer;
     z-index: 2;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
     color: #ffffff;
     background: #6C7A89;
@@ -181,7 +181,7 @@ body.overlay {
 #cssmenu .heading {
     cursor: pointer;
     z-index: 2;
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
     color: #fff;
     -webkit-transition: color .2s ease;
@@ -217,7 +217,7 @@ body.overlay {
 .topRight_Menu {
     position: fixed;
     top: 0;
-    right: 15px;
+    right: 0;
     padding: 10px;
     color: white;
     background: #6C7A89;
@@ -245,9 +245,11 @@ body.overlay {
 .topRight_subMenu ul {
     margin: 0;
     list-style-type: none;
+    background-color: #49505a;
 }
 .topRight_subMenu li {
     padding: 5px 10px;
+    background: #6C7A89;
 }
 .topRight_subMenu li a {
     color: #FFF;
@@ -258,10 +260,15 @@ body.overlay {
 }
 #user-name {
     background-color: #49505a;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 15ch;
+    margin-right: 0;
 }
-
-.slate {
-    background: #454545;
+.topRight_subMenu li.slate {
+    background: #444;
 }
 .slate.alert {
     background: #EF0812;
@@ -298,7 +305,6 @@ a {
     box-shadow: 3px 3px 3px 0px rgba(50, 50, 50, 0.3);
     padding: 3px 12px 12px;
 }
-
 .new-site-link {
     position: absolute;
     top: 32px;
@@ -353,6 +359,7 @@ td.user-site-controls {
     background: url('/profiles/openscholar/themes/os_basetheme/images/scholarbase-sprite.png') 0 -926px no-repeat;
     width: 20px;
     height: 20px;
+    background-color: #49505a;
 }
 .text_link {
     color: #215990;

@@ -175,7 +175,7 @@
 .morph-button-sidebar.open .morph-content {
     top: 0 !important;
     left: 0 !important;
-    width: 135px;
+    width: 132px;
     height: 100%;
     overflow: hidden;
     -webkit-backface-visibility: hidden;
