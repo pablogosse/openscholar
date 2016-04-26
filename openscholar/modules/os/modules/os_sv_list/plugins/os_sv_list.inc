@@ -247,7 +247,6 @@ class os_sv_list extends os_boxes_default {
 
 		error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", render");
 
-		error_log("EAM trace \$this = " . var_export($this));
 
     global $user;
     if (module_exists('vsite') && !vsite_get_vsite()) {
@@ -321,13 +320,11 @@ class os_sv_list extends os_boxes_default {
 
       }
 
-			error_log("EAM trace \$ids = " . var_export($ids));
 
       // Give plugins a chance to alter the entities after loading but before
       // rendering. see events.
       $entities = entity_load($this->entity_type, $ids);
 
-			error_log("EAM trace \$entities = " . var_export($entities));
 
       $account = user_load($user->uid);
 
@@ -401,7 +398,6 @@ class os_sv_list extends os_boxes_default {
       $this->set_cache($block['content'], $assets);
     }
 
-		error_log("EAM trace \$block = " . var_export($block));
 
     return $block;
   }
