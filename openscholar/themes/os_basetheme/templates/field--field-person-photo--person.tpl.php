@@ -13,6 +13,9 @@
            <?php print $item['#item']['os_file_description'][LANGUAGE_NONE][0]['value'];?>
          </figcaption>
         <?php endif;?>
+			
+				<?php print " <a href=\"/people/" . str_replace(" ", "-", strtolower($item['title'])) . "\">Read More</a>";
+
       </figure>
       </div>
       <?php endforeach; ?>
