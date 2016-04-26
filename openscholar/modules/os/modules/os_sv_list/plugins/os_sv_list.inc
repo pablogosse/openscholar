@@ -15,7 +15,8 @@ class os_sv_list extends os_boxes_default {
 
 		error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", set_cache_id");
 
-    // Discard 'all' bundle selection.  if ($bundle == 'node:all') {
+    // Discard 'all' bundle selection.  
+		if ($bundle == 'node:all') {
       $bundle = NULL;
     }
 
