@@ -12,6 +12,9 @@ class os_sv_list extends os_boxes_default {
   );
 
   protected function set_cache_id($bundle = NULL, $page = NULL) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", set_cache_id");
+
     // Discard 'all' bundle selection.
     if ($bundle == 'node:all') {
       $bundle = NULL;
@@ -21,11 +24,17 @@ class os_sv_list extends os_boxes_default {
   }
 
   public function __construct() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", __construct");
+
     parent::__construct();
     $this->entity_type = $this->bundle = NULL;
   }
 
   public function set_cache($cache, $box = NULL) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", set_cache");
+
     $this->_plugins_invoke('set_cache_time', $this->cache_time);
     parent::set_cache($cache, $box);
   }
@@ -34,6 +43,9 @@ class os_sv_list extends os_boxes_default {
    * Implementation of boxes_content::options_defaults().
    */
   public function options_defaults() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", options_defaults");
+
     $options = parent::options_defaults();
 
     $options += array(
@@ -76,6 +88,9 @@ class os_sv_list extends os_boxes_default {
    * Implementation of boxes_content::options_form().
    */
   public function options_form(&$form_state) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", options_form");
+
     $form = parent::options_form($form_state);
     $this->options = ($this->options) ? array_merge($this->options_defaults(), $this->options) : $this->options_defaults();
 
@@ -229,6 +244,9 @@ class os_sv_list extends os_boxes_default {
   }
 
   public function render() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", render");
+
     global $user;
     if (module_exists('vsite') && !vsite_get_vsite()) {
       return;
@@ -379,6 +397,9 @@ class os_sv_list extends os_boxes_default {
   }
 
   public function get_ids($page) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", get_ids");
+
     // Query for all content of our type.
     $query = $this->query();
     $this->_plugins_invoke('query_alter', $query);
@@ -433,6 +454,9 @@ class os_sv_list extends os_boxes_default {
   }
 
   public function query() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", query");
+
     $efq = new EntityFieldQuery();
     $efq->entityCondition('entity_type', $this->entity_type);
     if (module_exists('vsite') && $space = spaces_get_space()) {
@@ -453,6 +477,9 @@ class os_sv_list extends os_boxes_default {
    * entity_type, the render method can reset to only those applicable to the bundle.
    */
   private function _set_plugins($entity_type = NULL, $bundle = NULL) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _set_plugins");
+
     $this->plugins = array();
 
     foreach (os_sv_list_plugins($entity_type, $bundle) as $plugin) {
@@ -471,6 +498,9 @@ class os_sv_list extends os_boxes_default {
    * keyed array.
    */
   private function _plugins_invoke($method, &$args = NULL) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _plugins_invoke");
+
     $this->options = ($this->options) ? $this->options + $this->options_defaults() : $this->options_defaults();
     foreach ($this->plugins as $name => &$plugin) {
       if (method_exists($plugin['instance'], $method)) {
@@ -488,6 +518,9 @@ class os_sv_list extends os_boxes_default {
    * available to all content types.
    */
   private function entity_view_modes() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", entity_view_modes");
+
     $modes = array();
     $modes['list'] = os_entity_view_modes($this->entity_type);
     $all = array_reduce($modes['list'], 'array_intersect', current($modes['list'])); //starting with an empty array means we'll get an empty back.
@@ -506,6 +539,9 @@ class os_sv_list extends os_boxes_default {
 
 
   protected function _display_options() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _display_options");
+
     $defaults = array(  //Display modes will be shown in this order.  If no order is provided, it'll be determined by how the hooks load them.
       'node' => array('title', 'teaser', 'full'),
       'file' => array('os_files_link', 'os_files_link_icon', 'os_files_title', 'teaser', 'full'),
@@ -527,10 +563,16 @@ class os_sv_list extends os_boxes_default {
 
   /**
    * @function _more_link_defaults()
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _more_link_defaults");
+
    *
    * Gets the defaults that fill in for the more link when the content type changes
    */
   protected function _more_link_defaults() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _more_link_defaults");
+
     //more link.  still needs some refactoring love.
     //populate list of content types => paths
     ctools_include('os', 'os');
@@ -553,10 +595,16 @@ class os_sv_list extends os_boxes_default {
 
   /**
    * @function _sort_options()
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _sort_options");
+
    *
    * Returns hash of sort options and their labels
    */
   protected function _sort_options() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _sort_options");
+
     $sorts = array_reduce($this->_plugins_invoke('register_sorts'), 'array_merge', array());
     return $sorts;
   }
@@ -568,6 +616,9 @@ class os_sv_list extends os_boxes_default {
    * Items not appearing here are universal.
    */
   function _sort_options_type_bundles() {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", _sort_options_type_bundles");
+
     $return = array();
     foreach ($this->_plugins_invoke('register_sorts') as $plugin => $sorts) {
       $plugin = $this->plugins[$plugin];
@@ -578,6 +629,9 @@ class os_sv_list extends os_boxes_default {
   }
 
   function sort_random(EntityFieldQuery &$efq) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", sort_random");
+
     $efq->addTag('random');
   }
 
@@ -587,6 +641,9 @@ class os_sv_list extends os_boxes_default {
    * Just show each entity's title.
    */
   function display_title($entities) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", display_title");
+
     $info = entity_get_info($this->entity_type);
     $id = $info['entity keys']['id'];
     $label = $info['entity keys']['label'];
@@ -611,6 +668,9 @@ class os_sv_list extends os_boxes_default {
    * Switches to grid layout.
    */
   function layout_grid(&$render) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", layout_grid");
+
     switch ($this->options['content_type']) {
 
       case 'image':
@@ -666,6 +726,9 @@ class os_sv_list extends os_boxes_default {
    *   The query object.
    */
   private function order_by_sticky(&$query) {
+
+error_log("EAM Entering " . __FILE__ . ":" . __LINE__ . ", order_by_sticky");
+
     // Make note of the fact this query is executed for the list of posts widget.
     $query->addMetaData('sv_list', TRUE);
 

@@ -13,9 +13,10 @@
          </figcaption>
         <?php endif;?>
 			
-				<?php print " <a href=\"/people/" . str_replace(" ", "-", strtolower($item['title'])) . "\">Read More</a>"; ?>
-
       </figure>
+
+			<?php print " <a href=\"/" . str_replace(" ", "-", strtolower($item['title'])) . "\">Read More</a>"; ?>
+
       </div>
       <?php endforeach; ?>
 			<a href="">Read More</a>
