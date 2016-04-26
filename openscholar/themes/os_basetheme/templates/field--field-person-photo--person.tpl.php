@@ -6,13 +6,13 @@
   <div class="field-items"<?php print $content_attributes; ?>>
       <?php foreach ($items as $delta => $item): ?>
 
-			<?php error_log("EAM trace \$item = " . var_export($item)); ?>
-			<?php error_log("EAM trace \$item_attributes = " . var_export($item_attributes)); ?>
-			<?php error_log("EAM trace \$delta = " . var_export($delta)); ?>
+			<?php # error_log("EAM trace \$item = " . var_export($item)); ?>
+			<?php # error_log("EAM trace \$item_attributes = " . var_export($item_attributes)); ?>
+			<?php # error_log("EAM trace \$delta = " . var_export($delta)); ?>
 
-			<?php echo("EAM trace \$item = " . var_export($item)); ?>
-			<?php echo("EAM trace \$item_attributes = " . var_export($item_attributes)); ?>
-			<?php echo("EAM trace \$delta = " . var_export($delta)); ?>
+			<?php # echo("EAM trace \$item = " . var_export($item)); ?>
+			<?php # echo("EAM trace \$item_attributes = " . var_export($item_attributes)); ?>
+			<?php # echo("EAM trace \$delta = " . var_export($delta)); ?>
 
       <div class="field-item <?php print $delta % 2 ? 'odd' : 'even'; ?>"<?php print $item_attributes[$delta]; ?>>
       <figure>
