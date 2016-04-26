@@ -13,7 +13,7 @@
          </figcaption>
         <?php endif;?>
 			
-				<?php print " <a href=\"/people/" . str_replace(" ", "-", strtolower($item['title'])) . "\">Read More</a>";
+				<?php print " <a href=\"/people/" . str_replace(" ", "-", strtolower($item['title'])) . "\">Read More</a>"; ?>
 
       </figure>
       </div>
