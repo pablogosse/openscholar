@@ -103,6 +103,9 @@
  */
 hide($content['comments']);
 hide($content['links']);
+
+  error_log("EAM trace \$content['links'] = " . var_export($content['links']));
+
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
