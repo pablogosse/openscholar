@@ -107,6 +107,9 @@ hide($content['links']);
   error_log("EAM trace \$content['links'] = " . var_export($content['links']));
 
 ?>
+
+<?php print dsm($content); ?> 
+
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php if ($teaser):?>
