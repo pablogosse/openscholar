@@ -102,9 +102,10 @@
  * <?php print dsm($content); ?> to find variable names to hide() or render().
  */
 hide($content['comments']);
-hide($content['links']);
 
-  error_log("EAM trace \$content['links'] = " . var_export($content['links']));
+print dsm($content); 
+hide($content['links']);
+print dsm($content); 
 
 ?>
 
