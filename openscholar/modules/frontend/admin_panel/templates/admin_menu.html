@@ -1,10 +1,10 @@
-<button type="button" ng-show="admin_panel"></button>
+<button type="button" ng-show="admin_panel" role="button" aria-label="Open control panel"></button>
       <div class="morph-content" ng-show="admin_panel">
         <div>
           <div class="content-style-sidebar">
-            <a href="{{ paths.vsite_home }}?admin_panel=1" class="admin-menu-homeicon"></a>
-            <span class="icon icon-close">&#171; Close</span>
-            <span class="close-panel"></span>
+            <a href="{{ paths.vsite_home }}?admin_panel=1" class="admin-menu-homeicon" aria-label="Back to home">Back to home</a>
+            <span class="icon icon-close" role="button" aria-label="Close control panel">&#171; Close</span>
+            <span class="close-panel" role="button" aria-label="Close control panel"></span>
             <div id="cssmenu">
               <ul>
                 <li>&nbsp;</li>

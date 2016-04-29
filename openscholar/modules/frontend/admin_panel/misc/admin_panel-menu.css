@@ -72,6 +72,7 @@ body.overlay {
     height: 25px;
     background: url('images/home_button.png') no-repeat;
     background-size: 25px 25px;
+     text-indent:-10000px;
 }
 #branding ul.primary {
     margin: 0 10% 0 !important;

@@ -148,7 +148,7 @@ class os_boxes_media extends os_boxes_default {
         $this->set_cache($block['content'], $assets);
       }
       else {
-        $block['content'] = t('No media given.');
+        $block['content'] = '';
         $this->set_cache($block['content']);
       }
     }
