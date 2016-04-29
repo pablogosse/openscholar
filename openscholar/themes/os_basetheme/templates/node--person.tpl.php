@@ -112,52 +112,106 @@ print dpm($content);
 <?php print dsm($content); ?> 
 
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
 
   <?php if ($teaser):?>
     
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
         <?php print $user_picture; ?>
+      <?php print "line " . __LINE__; ?>
+        
+
         <p class="author-datetime"><?php print $submitted; ?></p>
+      <?php print "line " . __LINE__; ?>
+        
+
       </footer>
     <?php endif; ?>
 
     <?php print render($title_prefix); ?>    
+      <?php print "line " . __LINE__; ?>
+        
+
     <div class="person-teaser-wrapper">  
       <?php if ($title && !$page): ?>
         <header<?php print $header_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
           <?php if ($title): ?>
             <h1<?php print $title_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
               <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
+      <?php print "line " . __LINE__; ?>
+        
+
             </h1>
           <?php endif; ?>
         </header>
       <?php endif; ?>
   
       <div<?php print $content_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
         <?php print render($content); ?>
+      <?php print "line " . __LINE__; ?>
+        
+
       </div>
     
       <?php if ($links = render($content['links'])): ?>
         <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
+      <?php print "line " . __LINE__; ?>
+        
+
       <?php endif; ?>
     
       <?php print render($content['comments']); ?>
+      <?php print "line " . __LINE__; ?>
+        
+
     
       <?php print render($title_suffix); ?>
+      <?php print "line " . __LINE__; ?>
+        
+
 
       <a href="<?php print $node_url; ?>">Read More</a>
+      <?php print "line " . __LINE__; ?>
+        
+
     
     </div>
     
   <?php else:?>
     <?php print render($title_prefix); ?>
+      <?php print "line " . __LINE__; ?>
+        
+
   
     <?php if ($title && !$page): ?>
       <header<?php print $header_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
         <?php if ($title): ?>
           <h1<?php print $title_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
             <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
+      <?php print "line " . __LINE__; ?>
+        
+
           </h1>
         <?php endif; ?>
       </header>
@@ -165,24 +219,51 @@ print dpm($content);
   
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
         <?php print $user_picture; ?>
+      <?php print "line " . __LINE__; ?>
+        
+
         <p class="author-datetime"><?php print $submitted; ?></p>
+      <?php print "line " . __LINE__; ?>
+        
+
       </footer>
     <?php endif; ?>
   
     <div<?php print $content_attributes; ?>>
+      <?php print "line " . __LINE__; ?>
+        
+
       <?php print render($content); ?>
+      <?php print "line " . __LINE__; ?>
+        
+
     </div>
   
     <?php if ($links = render($content['links'])): ?>
       <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
+      <?php print "line " . __LINE__; ?>
+        
+
     <?php endif; ?>
   
     <?php print render($content['comments']); ?>
+      <?php print "line " . __LINE__; ?>
+        
+
   
     <?php print render($title_suffix); ?>
+      <?php print "line " . __LINE__; ?>
+        
+
 
     <a href="<?php print $node_url; ?>">Read More</a>
+      <?php print "line " . __LINE__; ?>
+        
+
     
   <?php endif;?>
 
