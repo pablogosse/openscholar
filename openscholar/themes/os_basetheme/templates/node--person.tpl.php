@@ -103,9 +103,9 @@
  */
 hide($content['comments']);
 
-print dsm($content); 
+print dpm($content); 
 hide($content['links']);
-print dsm($content); 
+print dpm($content); 
 
 ?>
 
@@ -178,5 +178,8 @@ print dsm($content);
     <?php print render($content['comments']); ?>
   
     <?php print render($title_suffix); ?>
+
+    <a href="<?php print $node_url; ?>">Read More</a>
+    
   <?php endif;?>
 </article>
