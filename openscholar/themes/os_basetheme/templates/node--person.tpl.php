@@ -139,10 +139,11 @@ hide($content['links']);
       <?php print render($content['comments']); ?>
     
       <?php print render($title_suffix); ?>
+
+      <a href="<?php print $node_url; ?>">Read More</a>
+
     </div>
     
-    <a href="<?php print $node_url; ?>">Read More</a>
-
   <?php else:?>
     <?php print render($title_prefix); ?>
   
