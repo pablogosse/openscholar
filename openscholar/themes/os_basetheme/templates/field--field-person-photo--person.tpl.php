@@ -17,3 +17,36 @@
       <?php endforeach; ?>
   </div>
 </div>
+
+
+
+  <script type="text/javascript">
+    console.log("Hi EAM 1095");
+
+    jQuery(document).ready(function() {
+        console.log("Hi EAM 1098");
+
+        var picBios = jQuery(".pic-bio");
+
+        // How to remove nested img elements?
+        var figures = jQuery("figure a");
+
+        var i = 0;
+        jQuery.each(figures, function(a,b) {
+            console.log(a);
+            console.log(b['href']);
+
+            var myHref = b['href'];
+            var newHTML = picBios[i].innerHTML + "<a href='" + myHref + "'>Read More</a>";
+
+            jQuery(picBios[i]).html(newHTML);
+
+            console.log(newHTML);
+
+            i++;
+        });
+      
+    });
+
+  </script>
+
