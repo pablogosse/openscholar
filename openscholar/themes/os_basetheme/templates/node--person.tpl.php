@@ -24,11 +24,11 @@
  * - $title: the (sanitized) title of the node.
  * - $content: An array of node items. Use render($content) to print them all,
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
  *   or print a subset such as render($content['field_example']). Use
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
  *   hide($content['field_example']) to temporarily suppress the printing of a
  *   given element.
@@ -107,7 +107,7 @@
  * later using the render() function. Install the Devel module and use
  * <?php print dsm($content); ?> to find variable names to hide() or render().
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
  */
 hide($content['comments']);
@@ -115,7 +115,7 @@ hide($content['comments']);
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
 
   <?php if ($teaser):?>
@@ -123,37 +123,37 @@ hide($content['comments']);
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
         <?php print $user_picture; ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
         <p class="author-datetime"><?php print $submitted; ?></p>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
       </footer>
     <?php endif; ?>
 
     <?php print render($title_prefix); ?>    
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
     <div class="person-teaser-wrapper">  
       <?php if ($title && !$page): ?>
         <header<?php print $header_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
           <?php if ($title): ?>
             <h1<?php print $title_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
               <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
             </h1>
           <?php endif; ?>
@@ -162,29 +162,29 @@ hide($content['comments']);
   
       <div<?php print $content_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
         <?php print render($content); ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
       </div>
     
       <?php if ($links = render($content['links'])): ?>
         <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
       <?php endif; ?>
     
       <?php print render($content['comments']); ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
     
       <?php print render($title_suffix); ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
 
     </div>
@@ -192,22 +192,22 @@ hide($content['comments']);
   <?php else:?>
     <?php print render($title_prefix); ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
   
     <?php if ($title && !$page): ?>
       <header<?php print $header_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
         <?php if ($title): ?>
           <h1<?php print $title_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
             <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
           </h1>
         <?php endif; ?>
@@ -217,44 +217,44 @@ hide($content['comments']);
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
         <?php print $user_picture; ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
         <p class="author-datetime"><?php print $submitted; ?></p>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
       </footer>
     <?php endif; ?>
   
     <div<?php print $content_attributes; ?>>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
       <?php print render($content); ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
     </div>
   
     <?php if ($links = render($content['links'])): ?>
       <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
     <?php endif; ?>
   
     <?php print render($content['comments']); ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
   
     <?php print render($title_suffix); ?>
 
-    <?php dpm("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
+    <?php error_log("EAM trace " . __FILE__ . ":" . __LINE__ ); ?>
  
 
   <?php endif;?>
