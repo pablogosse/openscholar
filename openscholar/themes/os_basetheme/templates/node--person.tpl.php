@@ -102,7 +102,7 @@
  * <?php print dsm($content); ?> to find variable names to hide() or render().
  */
 hide($content['comments']);
-hide($content['links']);
+# hide($content['links']);
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
@@ -139,8 +139,6 @@ hide($content['links']);
     
       <?php print render($title_suffix); ?>
 
-      <a href="<?php print $node_url; ?>">Read More</a>
-
     </div>
     
   <?php else:?>
@@ -174,8 +172,6 @@ hide($content['links']);
     <?php print render($content['comments']); ?>
   
     <?php print render($title_suffix); ?>
-
-    <a href="<?php print $node_url; ?>">Read More</a>
 
   <?php endif;?>
 </article>
