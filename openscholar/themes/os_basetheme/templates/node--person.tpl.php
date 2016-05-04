@@ -105,7 +105,7 @@ hide($content['links']);
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-5/4 258
+5/4 316pm
   <?php if ($teaser):?>
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
@@ -119,7 +119,7 @@ hide($content['links']);
         <header<?php print $header_attributes; ?>>
           <?php if ($title): ?>
             <h1<?php print $title_attributes; ?>>
-              <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>  5/4 306pm
+              <a href="<?php print $node_url; ?>" rel="bookmark"><?php print $title; ?></a>
             </h1>
           <?php endif; ?>
         </header>

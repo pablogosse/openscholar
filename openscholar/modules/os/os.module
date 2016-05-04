@@ -619,7 +619,7 @@ function os_process_node(&$vars) {
   }
 
   // Hide the original "Read more" link by removing it from the render array.
-  unset($vars['content']['links']['node']['#links']['node-readmore']);
+  # unset($vars['content']['links']['node']['#links']['node-readmore']);
 }
 
 /**
