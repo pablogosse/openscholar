@@ -571,9 +571,10 @@ function os_process_node(&$vars) {
   $vars['theme_hook_suggestions'][] = 'node__'.$vars['type'].'__'.$vars['view_mode'];
 
   // Only proceeds if we have a "Read more" link.
-//  if (!isset($vars['content']['links']['node']['#links']['node-readmore'])) {
-//    return;
-//  }
+  // FIXME: this isn't always set when it's supposed to be
+  //  if (!isset($vars['content']['links']['node']['#links']['node-readmore'])) {
+  //    return;
+  //  }
 
   // Hides the "Read more" link if there is no body value.
   $body_items = field_get_items('node', $vars['node'], 'body');
@@ -607,15 +608,19 @@ function os_process_node(&$vars) {
   // Now we know whether the read more links needs to be displayed or not.
   // With this information we can move the read more link so it can be displayed inline with the block
   if ($body_shortened && !$trailing_break_tag) {
+    global $base_url;
+
     $link = $vars['content']['links']['node']['#links']['node-readmore'];
     $link['attributes']['class'][] = 'node-readmore';
+    $link['title'] = "Read More";
+    $link['href'] = $base_url . $vars['node_url'];
     // Get last position of the last closing marker in teaser.
 
-    // THIS IS SHOULDN'T BE EVALUATING TO FALSE.  IS IT BECAUSE THE BREAK TAG HAS BEEN STRIPPED ABOVE?
-    if (true || preg_match('!</?(?:p)[^>]*>\s*$!i', $vars['content']['body'][0]['#markup'], $match, PREG_OFFSET_CAPTURE)) {
+    // Insert "Read More" link after the closing paragraph tag </p>
+    if (preg_match('!</?(?:p)[^>]*>\s*$!i', $body_full, $match, PREG_OFFSET_CAPTURE)) {
       $insert_point = $match[0][1];
       // Insert the link.
-      $vars['content']['body'][0]['#markup'] = substr_replace($vars['content']['body'][0]['#markup'], ' '.l($link['title'], $link['href'], $link), $insert_point, 0);
+      $vars['content']['body'][0]['#markup'] = substr_replace($body_shortened, ' '.l(t($link['title']), $link['href'], $link), $insert_point, 0);
     }
 
   }
