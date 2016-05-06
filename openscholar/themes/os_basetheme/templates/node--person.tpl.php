@@ -93,6 +93,7 @@
  * @see adaptivetheme_preprocess_node()
  * @see adaptivetheme_process_node()
  */
+
 /**
  * Hiding Content and Printing it Separately
  *
@@ -102,12 +103,11 @@
  */
 hide($content['comments']);
 hide($content['links']);
-
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php if ($teaser):?>
-
+    
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
         <?php print $user_picture; ?>
@@ -117,7 +117,6 @@ hide($content['links']);
 
     <?php print render($title_prefix); ?>    
     <div class="person-teaser-wrapper">  
-
       <?php if ($title && !$page): ?>
         <header<?php print $header_attributes; ?>>
           <?php if ($title): ?>
@@ -127,19 +126,23 @@ hide($content['links']);
           <?php endif; ?>
         </header>
       <?php endif; ?>
-
+  
       <div<?php print $content_attributes; ?>>
         <?php print render($content); ?>
       </div>
+    
       <?php if ($links = render($content['links'])): ?>
         <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
       <?php endif; ?>
+    
       <?php print render($content['comments']); ?>
+    
       <?php print render($title_suffix); ?>
     </div>
+    
   <?php else:?>
     <?php print render($title_prefix); ?>
-
+  
     <?php if ($title && !$page): ?>
       <header<?php print $header_attributes; ?>>
         <?php if ($title): ?>
@@ -149,24 +152,24 @@ hide($content['links']);
         <?php endif; ?>
       </header>
     <?php endif; ?>
-
+  
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
         <?php print $user_picture; ?>
         <p class="author-datetime"><?php print $submitted; ?></p>
       </footer>
     <?php endif; ?>
-
+  
     <div<?php print $content_attributes; ?>>
       <?php print render($content); ?>
     </div>
+  
     <?php if ($links = render($content['links'])): ?>
       <nav<?php print $links_attributes; ?>><?php print $links; ?></nav>
     <?php endif; ?>
-
+  
     <?php print render($content['comments']); ?>
-
+  
     <?php print render($title_suffix); ?>
-
   <?php endif;?>
 </article>
