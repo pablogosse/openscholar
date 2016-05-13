@@ -105,7 +105,7 @@ hide($content['comments']);
 hide($content['links']);
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-
+Fri May 13 18:27:06 EDT 2016
   <?php if ($teaser):?>
     
     <?php if(!empty($user_picture) || $display_submitted): ?>
