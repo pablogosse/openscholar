@@ -104,10 +104,11 @@
 hide($content['comments']);
 hide($content['links']);
 ?>
-Fri May 13 18:27:06 EDT 2016
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
   <?php if ($teaser):?>
     
+Mon May 16 10:09:03 EDT 2016
+
     <?php if(!empty($user_picture) || $display_submitted): ?>
       <footer<?php print $footer_attributes; ?>>
         <?php print $user_picture; ?>
@@ -141,6 +142,9 @@ Fri May 13 18:27:06 EDT 2016
     </div>
     
   <?php else:?>
+    
+Mon May 16 10:09:03 EDT 2016
+
     <?php print render($title_prefix); ?>
   
     <?php if ($title && !$page): ?>
