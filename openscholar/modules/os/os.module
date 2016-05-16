@@ -610,6 +610,8 @@ function os_process_node(&$vars) {
   if ($body_shortened && !$trailing_break_tag) {
     global $base_url;
 
+dpm($link);
+
     $link = $vars['content']['links']['node']['#links']['node-readmore'];
     $link['attributes']['class'][] = 'node-readmore';
     $link['title'] = "Read More";
