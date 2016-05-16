@@ -592,10 +592,6 @@ function os_process_node(&$vars) {
   $body_display   = isset($vars['content']['body'][0]['#markup']) ? trim($vars['content']['body'][0]['#markup']) : '';
   $body_shortened = (bool)(strlen($body_full) > strlen($body_display));
 
-error_log("EAM trace, body_display = " . var_export($body_display));
-error_log("EAM trace, body_shortened = " . var_export($body_shortened));
-error_log("EAM trace, body_items = " . var_export($body_items));
-
   // Checks if there is a break tag inserted at the end of the content.
   // If this is the case, there is no need to add a "read more" link.
   $trailing_break_tag = FALSE;
@@ -613,8 +609,6 @@ error_log("EAM trace, body_items = " . var_export($body_items));
   if ($body_shortened && !$trailing_break_tag) {
     global $base_url;
 
-error_log("EAM trace, link = " . var_export($link));
-
     $link = $vars['content']['links']['node']['#links']['node-readmore'];
     $link['attributes']['class'][] = 'node-readmore';
     $link['title'] = "Read More";
@@ -625,7 +619,7 @@ error_log("EAM trace, link = " . var_export($link));
     if (preg_match('!</?(?:p)[^>]*>\s*$!i', $body_full, $match, PREG_OFFSET_CAPTURE)) {
       $insert_point = $match[0][1];
       // Insert the link.
-      $vars['content']['body'][0]['#markup'] = l("EAM" . t($link['title']), $link['href'], $link);
+      $vars['content']['body'][0]['#markup'] = l(t($link['title']), $link['href'], $link);
     }
 
   }
