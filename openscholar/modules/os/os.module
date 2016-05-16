@@ -2576,14 +2576,34 @@ function os_drupal_goto_alter(&$path, &$options, &$http_response_code) {
  *    - batch: The number of nodes we need to iterate at once.
  *    - entity: The entity type.
  *    - path: Path for the file contain the classes or the functions.
+ *    - query: The class name and funciton to run, by default this is (queryXXXX, Query) 
+ *             where xxxx is the number if the update calling the batch. ex.( query7001, Query) 
  */
 function os_set_update_batch(&$sandbox, $info) {
+
+  // Get the stack of the function to get the number of update.
+  $backtrace = debug_backtrace();
+  $function = '';
+
+  array_walk($backtrace, function($backtrace) use (&$function) {
+    if (preg_match('/[a-z]_update_[0-9]/', $backtrace['function'])) {
+      $function = $backtrace['function'];
+    }
+  });
+
+  $update = '';
+  if ($function) {
+    // Get the number of the update in order to attache it to the default class
+    // name.
+    $explode = explode('_', $function);
+    $update = end($explode);
+  }
 
   $info += array(
     'entity' => 'node',
     'batch' => drupal_is_cli() ? 400: 150,
-    'query' => array('update', 'Query'),
-    'iterator' => array('update', 'Iterator'),
+    'query' => array('update' . $update, 'Query'),
+    'iterator' => array('update' . $update, 'Iterator'),
   );
 
   if (!empty($info['path'])) {

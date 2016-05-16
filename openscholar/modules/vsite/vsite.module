@@ -184,6 +184,7 @@ function vsite_user_admin_roles($variables) {
       'content editor',
       'vsite admin',
       'vsite user',
+	  'viewer',
     );
 
     if (in_array($rid, array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID)) || in_array($name, $role_names)) {
@@ -1684,7 +1685,7 @@ function vsite_admin_paths() {
  */
 function vsite_load_user_sites($user_id) {
   drupal_add_css(drupal_get_path('module', 'vsite') . '/css/vsite.css');
-
+  global $base_url;
   $sites_array = array();
   // Grab their sites.
   $vsites_owner = vsite_get_vsite_by_owner($user_id);
@@ -1697,7 +1698,8 @@ function vsite_load_user_sites($user_id) {
     $items[] = l($node->title, $site->get_absolute_url());
     //Display "Add subsite" link
     if (vsite_subsite_access('create', $site)) {
-      $subsite_link = l(t('Add subsite'), 'site/register', array('query' => array('parent' => $node->nid)));
+      $base_domain = variable_get('purl_base_domain', $base_url);
+      $subsite_link = l(t('Add subsite'), $base_domain . '/site/register', array('absolute' => TRUE, 'query' => array('parent' => $node->nid)));
       $items[] = array(
         'data' => $subsite_link,
         'class' => array('add-subsite'),
@@ -2054,6 +2056,7 @@ function vsite_form_user_profile_form_alter(&$form, &$form_state, &$form_id){
       'content editor',
       'vsite admin',
       'vsite user',
+	  'viewer',
     );
     foreach ($role_names  as $role_name) {
       $role = user_role_load_by_name($role_name);

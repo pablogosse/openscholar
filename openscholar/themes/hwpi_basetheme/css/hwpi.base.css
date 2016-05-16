@@ -501,6 +501,10 @@ font-size: 11px;
 .event-content .node-header h1.node-title {
     margin-bottom: 0;
 }
+.field-name-field-event-location .field-items {
+    float:none;
+    display: inline;
+}
 /* Class nodes */
 
 .node-class .field-name-field-semester,

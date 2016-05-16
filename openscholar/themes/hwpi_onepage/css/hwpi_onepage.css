@@ -187,7 +187,8 @@ ul.nice-menu-down li ul li ul {
 .front #content-panels {
     margin-bottom: 0;
 }
-.front #columns .block-boxes-os_boxes_media img {
+.front #columns .block-boxes-os_boxes_media img,
+.front #menu-bar .block-boxes-os_boxes_media img {
     margin: -15px 0 -20px 0;
 }
 .front .node-teaser.node-person {

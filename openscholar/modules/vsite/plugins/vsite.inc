@@ -432,6 +432,7 @@ class vsite extends space_og {
       'content editor',
       'vsite admin',
       'vsite user',
+      'viewer',
     );
 
     $og_roles = og_get_user_roles('node', $this->id, NULL, FALSE);

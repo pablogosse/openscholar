@@ -18,6 +18,29 @@ function os_exporter_ctools_plugin_type() {
 }
 
 /**
+ * Implements hook_cp_settings().
+ */
+function os_exporter_cp_settings() {
+  $form = array();
+  $disable_event_export = variable_get('os_exporter_disable_event_export', 0);
+  $default_value = isset($disable_event_export) ? $disable_event_export : 0;
+  $form['os_exporter_disable_event_export'] = array(
+    'group' => array(
+      '#id' => 'os_exporter',
+      '#title' => t('Events'),
+      '#weight' => 60,
+    ),
+    'form' => array(
+      '#type' => 'checkbox',
+      '#title' => t('Do not display export options on event pages.'),
+      '#default_value' => $default_value,
+    ),
+  );
+
+  return $form;
+}
+
+/**
  * Include CTools plugins and get all exporter plugins.
  *
  * @return array

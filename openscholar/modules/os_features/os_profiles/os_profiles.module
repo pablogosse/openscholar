@@ -1496,7 +1496,7 @@ function os_profiles_preprocess_node(&$variables) {
  */
 function os_profiles_create_site_from_profile($form, &$form_state, $node) {
   global $base_url;
-
+  $purl_base_domain = variable_get('purl_base_domain', $base_url);
   module_load_include('form.inc', 'vsite_register', 'vsite_register');
 
   $form_state['node'] = $node;
@@ -1504,7 +1504,7 @@ function os_profiles_create_site_from_profile($form, &$form_state, $node) {
   // Building URL by code and not via url() since url() will change it based
   // on the current space.
   $params = array(
-    '@url' => $base_url . '/jdoe',
+    '@url' => $purl_base_domain . '/jdoe',
   );
 
   $form['domain'] = array(
@@ -1520,7 +1520,7 @@ function os_profiles_create_site_from_profile($form, &$form_state, $node) {
   );
 
   // Adds the prefix to URL field.
-  $form['domain']['#field_prefix'] = $base_url . '/';
+  $form['domain']['#field_prefix'] = $purl_base_domain . '/';
 
   // Show the "create subsite" checkbox only in a "department" site.
   $vsite = vsite_get_vsite();

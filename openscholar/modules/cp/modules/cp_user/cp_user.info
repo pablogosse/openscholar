@@ -6,3 +6,5 @@ php = 5.2.4
 dependencies[] = cp
 dependencies[] = ctools
 dependencies[] = os
+features[user_permission][] = access content overview
+features[user_role][] = viewer

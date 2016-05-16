@@ -193,9 +193,9 @@ ul.grid {
 
 #header-container h1 {
   width:285px;
-  height: 50px;
+  height: 55px;
   text-indent: -999em;
-  background: url('../images/logo.png') no-repeat 0 0 transparent;
+  background: url('../images/logo.png?123') no-repeat 0 0 transparent;
   margin: 0 0 0 5px;
   }
 

@@ -1,18 +1,5 @@
 (function () {
 
-  // prevent submission of form unless "Download" button is pressed
-  function doSomeJs() {
-    jQuery("form#os-reports-site-form").submit(function(event) {
-      if(jQuery(document.activeElement).attr('id') != null) {
-        event.preventDefault();
-      }
-    });
-  }
-
-  if (window.addEventListener) window.addEventListener("load", doSomeJs, false);
-  else if (window.attachEvent) window.attachEvent("onload", doSomeJs);
-  else window.onload = doSomeJs;
-
   var reportModule = angular.module('ReportModule', ['os-auth']);
   reportModule.controller('SiteReportQuery', ['$sce', '$http', '$scope', function ($sce, $http, $scope) {
     $scope.params = {};

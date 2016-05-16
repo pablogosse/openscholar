@@ -66,19 +66,15 @@
 		var self = this;
 		// open
 		this.button.addEventListener( 'click', function() {
-            self.toggle();
-            self.expanded = !self.expanded;
-        } );
+        self.toggle();
+    } );
 		// close
 		if( this.options.closeEl !== '' ) {
 			var closeEl = this.el.querySelector( this.options.closeEl );
-			if( closeEl ) {
-                closeEl.addEventListener('click', function() {
-                    self.toggle();
-                    self.expanded = !self.expanded;
-                });
-
-
+      if( closeEl ) {
+        closeEl.addEventListener('click', function() {
+            self.toggle();
+        });
 			}
 		}
 		if( this.options.closeEl2 !== '' ) {
@@ -105,9 +101,9 @@
 
 		var self = this,
 			onEndTransitionFn = function( ev ) {
-				if( self.support.transitions && ev.target !== this ) return false;
+				if( self.support.transitions && !self.el.classList.contains('no-transition') && ev.target !== this ) return false;
 
-				if( self.support.transitions ) {
+				if( self.support.transitions && !self.el.classList.contains('no-transition') ) {
 					// open: first opacity then width/height/left/top
 					// close: first width/height/left/top then opacity
 					if( self.expanded && ev.propertyName !== 'opacity' || !self.expanded && ev.propertyName !== 'width' && ev.propertyName !== 'height' && ev.propertyName !== 'left' && ev.propertyName !== 'top' ) {
@@ -126,14 +122,8 @@
 				else {
 					self.options.onAfterOpen();
 				}
+        self.expanded = !self.expanded;
 			};
-
-		if( this.support.transitions ) {
-			this.contentEl.addEventListener( transEndEventName, onEndTransitionFn );
-		}
-		else {
-			onEndTransitionFn();
-		}
 			
 		// set the left and top values of the contentEl (same like the button)
 		var buttonPos = this.button.getBoundingClientRect();
@@ -143,29 +133,35 @@
 		this.contentEl.style.top = 'auto';
 		
 		// add/remove class "open" to the button wraper
-		self.contentEl.style.left = buttonPos.left + 'px';
-		self.contentEl.style.top = buttonPos.top + 'px';
+		setTimeout( function() { 
+			self.contentEl.style.left = buttonPos.left + 'px';
+			self.contentEl.style.top = buttonPos.top + 'px';
+			
+			if( self.expanded ) {
+				jQuery(self.contentEl).removeClass('no-transition');
+				jQuery(self.el).removeClass('open');
+			}
+			else {
+				setTimeout( function() {
+					if (self.openTransition) {
+					  jQuery(self.contentEl).removeClass('no-transition');
+					}
+					
+					jQuery(self.el).addClass('open');
+					
+					if (!self.openTransition) {
+					  jQuery(self.contentEl).removeClass('no-transition');
+          }
+				}, 25 );
+			}
+		}, 25 );
 
-		// Don't put this in a setTimeout, it relies on self.expanded to be set correctly
-		// self.expanded is changed just after the toggle function runs in most cases.
-		if( self.expanded ) {
-			jQuery(self.contentEl).removeClass('no-transition');
-			jQuery(self.el).removeClass('open');
-		}
-		else {
-			setTimeout( function() {
-				if (self.openTransition) {
-					jQuery(self.contentEl).removeClass('no-transition');
-				}
-
-				jQuery(self.el).addClass('open');
-
-				if (!self.openTransition) {
-					jQuery(self.contentEl).removeClass('no-transition');
-          		}
-			}, 25 );
-		}
-
+    if( this.support.transitions && !this.el.classList.contains('no-transition') ) {
+      this.contentEl.addEventListener( transEndEventName, onEndTransitionFn );
+    }
+    else {
+      setTimeout(onEndTransitionFn, 30);
+    }
 	}
 
 	// add to global namespace

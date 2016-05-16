@@ -5,6 +5,7 @@ package = Control Panel
 dependencies[] = cp
 dependencies[] = ctools
 dependencies[] = os
+dependencies[] = spaces
 dependencies[] = views
 dependencies[] = views_bulk_operations
 features[ctools][] = views:views_default:3.0

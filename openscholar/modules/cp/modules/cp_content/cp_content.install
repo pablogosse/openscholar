@@ -36,3 +36,11 @@ function cp_content_update_7004() {
   features_revert(array('cp_content' => array('views_view')));
   return t('CP Content Views reverted to defaults.');
 }
+
+/**
+ * Reverts cp_content views to disable Comments view when Blog is disabled.
+ */
+function cp_content_update_7005() {
+  features_revert(array('cp_content' => array('views_view')));
+  return t('CP Content Views reverted to defaults.');
+}

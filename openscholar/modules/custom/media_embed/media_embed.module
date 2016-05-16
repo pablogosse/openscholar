@@ -267,40 +267,38 @@ function media_embed_file_formatter_media_embed_view($file, $display, $langcode)
       $html = &$file->field_html_code[LANGUAGE_NONE][0]['safe_value'];
 
       // copied from dead embedfilter module
-      preg_match('/height="([0-9]*)"/', $html, $fetchheight);
+      preg_match('/height="([^\"]*)"/', $html, $fetchheight);
       preg_match('/width="([^\"]*)"/', $html, $fetchwidth);
+
       if ($fetchheight && $fetchwidth) {
         $height = $fetchheight[1];
-        // We're going to assume that the max width is 1000px
-        // The final width value is calculated as %value * 1000px
-        if (strpos($fetchwidth[1], '%') !== FALSE) {
-          $term = explode("%", $fetchwidth[1]);
-          $width = ceil(($term[0]/100) * 1000);
-          $file->field_html_code[LANGUAGE_NONE][0]['safe_value'] = preg_replace('/width="(\d+(\.\d+)?%)"/', 'width=' . $width, $file->field_html_code[LANGUAGE_NONE][0]['safe_value']);
-        }
-        else {
-          $width = $fetchwidth[1];
-        }
+        $width = $fetchwidth[1];
       }
 
       $target_width = 0;
-      if (isset($file->override['attributes']['width'])) {
+      if (isset($file->override['attributes']['width']) && $file->override['attributes']['width']) {
         $target_width = $file->override['attributes']['width'];
       }
-      elseif (isset($file->override['maxwidth']) && $file->override['maxwidth'] && $width > $file->override['maxwidth']) {
+      elseif (isset($file->override['maxwidth']) && $file->override['maxwidth'] && $width > $file->override['maxwidth'] && strpos($width, '%') === FALSE) {
         $target_width = $file->override['maxwidth'];
+      }
+      else {
+        $target_width = $width;
       }
 
       $target_height = 0;
-      if (isset($file->override['attributes']['height'])) {
+      if (isset($file->override['attributes']['height']) && $file->override['attributes']['height']) {
         $target_height = $file->override['attributes']['height'];
       }
-      elseif (isset($file->override['maxheight']) && $file->override['maxheight'] && $height > $file->override['maxheight']) {
+      elseif (isset($file->override['maxheight']) && $file->override['maxheight'] && $height > $file->override['maxheight'] && strpos($height, '%') === FALSE) {
         $target_height = $file->override['maxheight'];
+      }
+      else {
+        $target_height = $height;
       }
 
       if ($target_width) {
-        if (!$target_height) {
+        if (!$target_height && strpos($width, '%') === FALSE) {
           $diff = abs($width - $target_width);
           $ratio = ($width - $diff) / $width;
           $height = $ratio * $height;

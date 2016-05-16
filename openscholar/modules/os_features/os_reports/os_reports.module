@@ -95,10 +95,8 @@ function os_reports_assemble_file_rows($rows, &$context) {
 function os_reports_print_file(&$context) {
   global $base_url;
   $filename = str_replace("http://", "", $base_url) . "-site-report.csv";
-  drupal_add_http_header("Cache-Control", "public");
   drupal_add_http_header("Content-Type", "application/octet-stream");
-  drupal_add_http_header("Cache-Control", "o-store, no-cache, must-revalidate");
-  drupal_add_http_header("Cache-Control", "post-check=0, pre-check=0");
+  drupal_add_http_header("Cache-Control", "o-store, no-cache, must-revalidate, post-check=0, pre-check=0");
   drupal_add_http_header("Content-Disposition", "attachment; filename=\"$filename\";" );
   drupal_add_http_header("Content-Transfer-Encoding", "binary");
   foreach ($context['results'] as $row) {

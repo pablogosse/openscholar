@@ -44,7 +44,7 @@ class os_taxonomy_fbt extends os_boxes_default {
     ctools_include('dependent');
     ctools_add_js('dependent');
 
-    $form = $this->form_elements();
+    $form = $this->form_elements($form_state);
 
     // Reset the keys.
     foreach (array_keys($form) as $setting) {
@@ -74,15 +74,19 @@ class os_taxonomy_fbt extends os_boxes_default {
    * Returning the form for building the form and reset the form values with
    * $form keys.
    */
-  public function form_elements() {
+  public function form_elements(&$form_state) {
     $form = array();
-
+    $selected_vid = isset($form_state['values']['vocabulary']) ? $form_state['values']['vocabulary'] : $this->options['vocabulary'];
     $form['vocabulary'] = array(
       '#type' => 'select',
       '#description' => t('Which vocabularies would you like to use to filter posts.'),
       '#title' => t('Vocabularies'),
       '#options' => self::get_all_vocabularies(),
       '#required' => TRUE,
+      '#ajax' => array(
+        'callback' => 'os_boxes_taxonomy_fbt_vocab_ajax_callback',
+        'wrapper' => 'bundles-wrapper',
+      ),
     );
 
     $form['widget_type'] = array(
@@ -109,11 +113,13 @@ class os_taxonomy_fbt extends os_boxes_default {
     );
 
     $form['bundles'] = array(
+      '#prefix' => '<div id="bundles-wrapper">',
+      '#suffix' => '</div>',
       '#type' => 'select',
-      '#title' => t('Type'),
-      '#options' => $this->getTaxonomyBundles(),
+      '#title' =>  t('Type'),
+      '#options' => $this->getTaxonomyBundles($selected_vid),
       '#multiple' => FALSE,
-      '#size' => count($this->getTaxonomyBundles()) / 2,
+      '#size' => ceil(count($this->getTaxonomyBundles($selected_vid)) / 2),
       '#dependency' => array(
         'edit-behavior' => array('select'),
       ),
@@ -177,7 +183,7 @@ class os_taxonomy_fbt extends os_boxes_default {
    * 
    * @return array
    */
-  protected function getTaxonomyBundles() {
+  protected function getTaxonomyBundles($vid = NULL) {
     $info = &drupal_static(__METHOD__);
 
     if ($info) {
@@ -185,22 +191,40 @@ class os_taxonomy_fbt extends os_boxes_default {
     }
 
     $bundles = os_get_bundles(array(1,2));
+    $allowed_bundles = array();
+
+    if ($vid != NULL) {
+      $allowed_bundles = db_select('og_vocab', 'ogv')
+        ->fields('ogv', array('bundle'))
+        ->condition('ogv.vid', $vid, '=')
+        ->condition('ogv.entity_type', 'node', '=')
+        ->execute()
+        ->fetchCol();
+    }
+
     // Removing Feed Importer and Slideshow Image from dropdown.
     foreach ($bundles as $key => $val) {
       if (in_array($key, array('feed_importer', 'slideshow_slide'))) {
         unset($bundles[$key]);
       }
+      else if (!in_array($key, $allowed_bundles) && $vid != NULL) {
+        unset($bundles[$key]);
+      }
     }
+    // Checking if event bundle is available in allowed list of bundles.
     $delta = array_search('event', array_keys($bundles));
-    $first = array_slice($bundles, 0, $delta);
-    $second = array_slice($bundles, $delta + 1);
-    $events_type = array(
-      'past_event' => t('Past event'),
-      'upcoming_event' => t('Upcoming event'),
-    );
-
-    $info = $first + $events_type + $second;
-
+    if (!empty($delta)) {
+      $first = array_slice($bundles, 0, $delta);
+      $second = array_slice($bundles, $delta + 1);
+      $events_type = array(
+        'past_event' => t('Past event'),
+        'upcoming_event' => t('Upcoming event'),
+      );
+      $info = $first + $events_type + $second;
+    }
+    else {
+      return $bundles;
+    }
     return $info;
   }
 
@@ -375,3 +399,10 @@ class os_taxonomy_fbt extends os_boxes_default {
     return $vocabularies;
   }
 }
+
+  /**
+  * AJAX callback to update Bundles set as per selected vocabulary.
+  */
+  function os_boxes_taxonomy_fbt_vocab_ajax_callback($form, &$form_state) {
+    return $form['options']['bundles'];
+  }

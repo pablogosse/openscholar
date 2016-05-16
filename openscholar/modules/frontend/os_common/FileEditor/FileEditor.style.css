@@ -116,7 +116,9 @@ div[file-edit] h4,
     border: 1px solid darkred;
     padding: 3px;
     display: none;
+    z-index: 2;
 }
+
 #fe-file-name.error + div::before {
     display: block;
 }

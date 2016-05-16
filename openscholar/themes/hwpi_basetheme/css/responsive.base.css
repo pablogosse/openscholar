@@ -71,7 +71,8 @@ iframe {
 /* FLOATS EVENT TITLE AND TEASER INFO TO THE RIGHT OF THE SHIELD/DATE ICON */
   .node-event .node-header { margin: -70px 0 10px 70px !important; }
   .node-event .node-content,
-  .node-event .clearfix { margin-left: 70px !important; }
+  .node-event .clearfix,
+  #content .node-event .event-content .node-content .field-name-field-event-location { margin-left: 70px !important; }
   .node-event .field-name-field-event-location  { margin-left: 0 ! important; }
 }
 

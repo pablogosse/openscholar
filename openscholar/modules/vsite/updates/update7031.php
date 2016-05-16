@@ -3,7 +3,7 @@
 /**
  * Contains static methods for vsite update 7031.
  */
-class update extends AbstractUpdate {
+class update7031 extends AbstractUpdate {
 
   /**
    * @inheritdoc

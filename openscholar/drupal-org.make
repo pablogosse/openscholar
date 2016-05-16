@@ -477,9 +477,9 @@ libraries[responsiveslides][download][url] = "https://github.com/viljamis/Respon
 libraries[responsiveslides][download][revision] = "120079561d7a4f8a6459f7a5d8aa657ad5d3db83"
 libraries[responsiveslides][patch][] = "https://gist.githubusercontent.com/RoySegall/412084926772e2e4181d/raw/8b98aa3d880ab40ac74a6343d74928a7a1667b7a/foo.patch"
 
-; libraries[flexslider][type] = "libraries"
-; libraries[flexslider][download][type] = "file"
-; libraries[flexslider][download][url] = "https://github.com/woothemes/FlexSlider/archive/flexslider1.zip"
+libraries[flexslider][type] = "libraries"
+libraries[flexslider][download][type] = "file"
+libraries[flexslider][download][url] = "https://github.com/downloads/woothemes/FlexSlider/FlexSlider-2.0.zip"
 
 libraries[select2][type] = "libraries"
 libraries[select2][download][type] = "file"
