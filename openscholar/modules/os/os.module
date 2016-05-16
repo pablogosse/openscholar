@@ -571,9 +571,9 @@ function os_process_node(&$vars) {
   $vars['theme_hook_suggestions'][] = 'node__'.$vars['type'].'__'.$vars['view_mode'];
 
   // Only proceeds if we have a "Read more" link.
-  if (!isset($vars['content']['links']['node']['#links']['node-readmore'])) {
-    return;
-  }
+  // if (!isset($vars['content']['links']['node']['#links']['node-readmore'])) {
+  //   return;
+  // }
 
   // Hides the "Read more" link if there is no body value.
   $body_items = field_get_items('node', $vars['node'], 'body');
