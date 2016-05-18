@@ -57,7 +57,7 @@ function os_image_gallery_menu_alter(&$items) {
  */
 function os_image_gallery_menu_local_tasks_alter(&$tasks, $item, $path) {
   if ($path == 'media-gallery/detail/%/%/remove') {
-    $tasks['tabs'] = [];
+    $tasks['tabs'] = array();
     return;
   }
 }
